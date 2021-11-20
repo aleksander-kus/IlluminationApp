@@ -41,11 +41,15 @@ namespace PresentationLayer
             this.mTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.colorTable = new System.Windows.Forms.TableLayoutPanel();
-            this.changeLightButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.scenePreview = new System.Windows.Forms.PictureBox();
+            this.sceneColorButton = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.sceneColorButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lightColorPreview = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.changeLightButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -59,6 +63,9 @@ namespace PresentationLayer
             this.groupBox3.SuspendLayout();
             this.colorTable.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scenePreview)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -203,8 +210,8 @@ namespace PresentationLayer
             this.colorTable.ColumnCount = 1;
             this.colorTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.colorTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.colorTable.Controls.Add(this.changeLightButton, 0, 0);
             this.colorTable.Controls.Add(this.groupBox4, 0, 1);
+            this.colorTable.Controls.Add(this.panel1, 0, 0);
             this.colorTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.colorTable.Location = new System.Drawing.Point(3, 19);
             this.colorTable.Name = "colorTable";
@@ -214,18 +221,9 @@ namespace PresentationLayer
             this.colorTable.Size = new System.Drawing.Size(335, 149);
             this.colorTable.TabIndex = 0;
             // 
-            // changeLightButton
-            // 
-            this.changeLightButton.Location = new System.Drawing.Point(3, 3);
-            this.changeLightButton.Name = "changeLightButton";
-            this.changeLightButton.Size = new System.Drawing.Size(329, 23);
-            this.changeLightButton.TabIndex = 0;
-            this.changeLightButton.Text = "Change light color";
-            this.changeLightButton.UseVisualStyleBackColor = true;
-            this.changeLightButton.Click += new System.EventHandler(this.changeLightButton_Click);
-            // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.scenePreview);
             this.groupBox4.Controls.Add(this.sceneColorButton);
             this.groupBox4.Controls.Add(this.radioButton2);
             this.groupBox4.Controls.Add(this.radioButton1);
@@ -236,6 +234,25 @@ namespace PresentationLayer
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Scene color";
+            // 
+            // scenePreview
+            // 
+            this.scenePreview.Location = new System.Drawing.Point(93, 20);
+            this.scenePreview.Name = "scenePreview";
+            this.scenePreview.Size = new System.Drawing.Size(48, 23);
+            this.scenePreview.TabIndex = 3;
+            this.scenePreview.TabStop = false;
+            this.scenePreview.Paint += new System.Windows.Forms.PaintEventHandler(this.scenePreview_Paint);
+            // 
+            // sceneColorButton
+            // 
+            this.sceneColorButton.Location = new System.Drawing.Point(148, 20);
+            this.sceneColorButton.Name = "sceneColorButton";
+            this.sceneColorButton.Size = new System.Drawing.Size(175, 23);
+            this.sceneColorButton.TabIndex = 2;
+            this.sceneColorButton.Text = "Change scene color";
+            this.sceneColorButton.UseVisualStyleBackColor = true;
+            this.sceneColorButton.Click += new System.EventHandler(this.sceneColorButton_Click);
             // 
             // radioButton2
             // 
@@ -259,15 +276,45 @@ namespace PresentationLayer
             this.radioButton1.Text = "Solid color";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // sceneColorButton
+            // panel1
             // 
-            this.sceneColorButton.Location = new System.Drawing.Point(93, 20);
-            this.sceneColorButton.Name = "sceneColorButton";
-            this.sceneColorButton.Size = new System.Drawing.Size(230, 23);
-            this.sceneColorButton.TabIndex = 2;
-            this.sceneColorButton.Text = "Change scene color";
-            this.sceneColorButton.UseVisualStyleBackColor = true;
-            this.sceneColorButton.Click += new System.EventHandler(this.sceneColorButton_Click);
+            this.panel1.Controls.Add(this.lightColorPreview);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.changeLightButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(329, 23);
+            this.panel1.TabIndex = 2;
+            // 
+            // lightColorPreview
+            // 
+            this.lightColorPreview.Location = new System.Drawing.Point(119, 0);
+            this.lightColorPreview.Name = "lightColorPreview";
+            this.lightColorPreview.Size = new System.Drawing.Size(48, 23);
+            this.lightColorPreview.TabIndex = 4;
+            this.lightColorPreview.TabStop = false;
+            this.lightColorPreview.Paint += new System.Windows.Forms.PaintEventHandler(this.lightColorPreview_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Current light color:";
+            // 
+            // changeLightButton
+            // 
+            this.changeLightButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.changeLightButton.Location = new System.Drawing.Point(178, 0);
+            this.changeLightButton.Name = "changeLightButton";
+            this.changeLightButton.Size = new System.Drawing.Size(145, 23);
+            this.changeLightButton.TabIndex = 0;
+            this.changeLightButton.Text = "Change light color";
+            this.changeLightButton.UseVisualStyleBackColor = true;
+            this.changeLightButton.Click += new System.EventHandler(this.changeLightButton_Click);
             // 
             // FillWindow
             // 
@@ -295,6 +342,10 @@ namespace PresentationLayer
             this.colorTable.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scenePreview)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -318,5 +369,9 @@ namespace PresentationLayer
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button sceneColorButton;
+        private System.Windows.Forms.PictureBox scenePreview;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox lightColorPreview;
     }
 }

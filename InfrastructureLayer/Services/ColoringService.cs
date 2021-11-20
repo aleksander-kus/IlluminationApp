@@ -116,7 +116,7 @@ namespace InfrastructureLayer.Services
         }
         private Color ComputeColor(Vector3 point, IlluminationParameters parameters)
         {
-            if (point == new Vector3(407, 407, 0))
+            if (point == new Vector3(parameters.Radius, parameters.Radius, 0))
                 return Color.Black;
             var I_O = parameters.SceneColor.From01();  // the base color of point
             var I_L = parameters.LightColor.From01();  // light color

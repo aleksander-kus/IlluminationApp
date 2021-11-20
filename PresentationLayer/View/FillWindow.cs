@@ -54,12 +54,6 @@ namespace PresentationLayer
         private void triangulationBar_ValueChanged(object sender, EventArgs e)
         {
             presenter.TriangulationPrecision = triangulationBar.Value;
-
-        }
-
-        private void mTrackbar_Scroll(object sender, EventArgs e)
-        {
-
         }
 
         private Color? pickColor()
@@ -78,6 +72,7 @@ namespace PresentationLayer
                 presenter.Parameters.LightColor = color.Value;
                 presenter.ColorBitmap();
             }
+            lightColorPreview.Invalidate();
         }
 
         private void sceneColorButton_Click(object sender, EventArgs e)
@@ -88,6 +83,19 @@ namespace PresentationLayer
                 presenter.Parameters.SceneColor = color.Value;
                 presenter.ColorBitmap();
             }
+            scenePreview.Invalidate();
+        }
+
+        private void scenePreview_Paint(object sender, PaintEventArgs e)
+        {
+            using Brush brush = new SolidBrush(presenter.Parameters.SceneColor);
+            e.Graphics.FillRectangle(brush, 0, 0, scenePreview.Width, scenePreview.Height);
+        }
+
+        private void lightColorPreview_Paint(object sender, PaintEventArgs e)
+        {
+            using Brush brush = new SolidBrush(presenter.Parameters.LightColor);
+            e.Graphics.FillRectangle(brush, 0, 0, lightColorPreview.Width, lightColorPreview.Height);
         }
     }
 }
