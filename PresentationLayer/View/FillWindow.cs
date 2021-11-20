@@ -51,14 +51,43 @@ namespace PresentationLayer
             presenter.ColorBitmap();
         }
 
-        private void triangulationBar_MouseUp(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void triangulationBar_Scroll(object sender, EventArgs e)
+        private void triangulationBar_ValueChanged(object sender, EventArgs e)
         {
             presenter.TriangulationPrecision = triangulationBar.Value;
 
+        }
+
+        private void mTrackbar_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private Color? pickColor()
+        {
+            ColorDialog cd = new();
+            if (cd.ShowDialog() == DialogResult.OK)
+                return cd.Color;
+            return null;
+        }
+
+        private void changeLightButton_Click(object sender, EventArgs e)
+        {
+            var color = pickColor();
+            if (color.HasValue)
+            {
+                presenter.Parameters.LightColor = color.Value;
+                presenter.ColorBitmap();
+            }
+        }
+
+        private void sceneColorButton_Click(object sender, EventArgs e)
+        {
+            var color = pickColor();
+            if (color.HasValue)
+            {
+                presenter.Parameters.SceneColor = color.Value;
+                presenter.ColorBitmap();
+            }
         }
     }
 }

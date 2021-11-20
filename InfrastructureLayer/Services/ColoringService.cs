@@ -118,11 +118,11 @@ namespace InfrastructureLayer.Services
         {
             if (point == new Vector3(407, 407, 0))
                 return Color.Black;
-            var I_O = new Vector3(1f, 1f, 1f);  // the base color of point
-            var I_L = new Vector3(1, 1, 1);  // light color
+            var I_O = parameters.SceneColor.From01();  // the base color of point
+            var I_L = parameters.LightColor.From01();  // light color
             var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
             var V = new Vector3(0, 0, 1);
-            var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius);
+            var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius * 2);
 
             var L = Vector3.Normalize(sourceLocation - point);
             var R = 2 * Vector3.Dot(N, L) * N - L;

@@ -32,6 +32,12 @@ namespace PresentationLayer
             
             triangulationService = new TriService();
             coloringService = new ColoringService();
+            Parameters = new()
+            {
+                Radius = view.CanvasSizeX / 2,
+                SceneColor = Color.Green,
+                LightColor = Color.White
+            };
             Parameters.Radius = view.CanvasSizeX / 2;
             CalculateTriangulation();
             ColorBitmap();
