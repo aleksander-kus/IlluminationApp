@@ -33,9 +33,32 @@ namespace PresentationLayer
             presenter.TriangulationPrecision = triangulationBar.Value;
         }
 
-        private void triangulationBar_ValueChanged(object sender, EventArgs e)
+        private void kdTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.Kd = kdTrackbar.Value / 100.0f;
+            presenter.ColorBitmap();
+        }
+
+        private void ksTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.Ks = ksTrackbar.Value / 100.0f;
+            presenter.ColorBitmap();
+        }
+
+        private void mTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.m = mTrackbar.Value;
+            presenter.ColorBitmap();
+        }
+
+        private void triangulationBar_MouseUp(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void triangulationBar_Scroll(object sender, EventArgs e)
         {
             presenter.TriangulationPrecision = triangulationBar.Value;
+
         }
     }
 }

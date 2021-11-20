@@ -1,4 +1,5 @@
-﻿using InfrastructureLayer.Services;
+﻿using DomainLayer;
+using InfrastructureLayer.Services;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
@@ -19,6 +20,7 @@ namespace PresentationLayer
                 ColorBitmap();
             }
         }
+        public IlluminationParameters Parameters = new();
         private readonly ITriangulationService triangulationService;
         private readonly IColoringService coloringService;
 
@@ -30,6 +32,7 @@ namespace PresentationLayer
             
             triangulationService = new TriService();
             coloringService = new ColoringService();
+            Parameters.Radius = view.CanvasSizeX / 2;
             CalculateTriangulation();
             ColorBitmap();
         }
@@ -37,11 +40,12 @@ namespace PresentationLayer
         private void CalculateTriangulation() =>
             triangulatedSphere = triangulationService.TriangulateSphere(bitmap.Height / 2, bitmap.Width / 2, bitmap.Height / 2, triangulationPrecision);
 
-        private void ColorBitmap()
+        public void ColorBitmap()
         {
-            coloringService.FillTriangles(bitmap, triangulatedSphere, Color.Green);
+            view.CanvasImage = new Bitmap(bitmap);
+            coloringService.FillTriangles(bitmap, triangulatedSphere, Color.Green, Parameters);
             coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
-
+            view.CanvasImage = bitmap;
             view.Redraw();
         }
     }

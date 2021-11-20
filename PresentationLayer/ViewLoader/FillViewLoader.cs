@@ -27,6 +27,5 @@ namespace PresentationLayer
             view.Show();
             loadedView = view;
         }
-
     }
 }
