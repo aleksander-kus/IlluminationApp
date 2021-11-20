@@ -39,18 +39,24 @@ namespace PresentationLayer
                 LightColor = Color.White
             };
             Parameters.Radius = view.CanvasSizeX / 2;
+            Parameters.PropertyChanged += Parameters_PropertyChanged;
             CalculateTriangulation();
+            ColorBitmap();
+        }
+
+        private void Parameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
             ColorBitmap();
         }
 
         private void CalculateTriangulation() =>
             triangulatedSphere = triangulationService.TriangulateSphere(bitmap.Height / 2, bitmap.Width / 2, bitmap.Height / 2, triangulationPrecision);
 
-        public void ColorBitmap()
+        private void ColorBitmap()
         {
             view.CanvasImage = new Bitmap(bitmap);
             coloringService.FillTriangles(bitmap, triangulatedSphere, Color.Green, Parameters);
-            coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
+            //coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
             view.CanvasImage = bitmap;
             view.Redraw();
         }

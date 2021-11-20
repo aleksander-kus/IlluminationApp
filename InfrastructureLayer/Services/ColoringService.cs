@@ -41,10 +41,11 @@ namespace InfrastructureLayer.Services
             int bytesPerPixel = bitmapData.Stride / bitmap.Width;
             // Copy the RGB values into the array.
             System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
-
+            int bitmapWidth = bitmap.Width;
             // Set every third value to 255. A 24bpp bitmap will look red.  
-            foreach (var shape in shapes)
-                ScanLineColoring(rgbValues, bitmap.Width, bytesPerPixel, shape, parameters);
+            Parallel.ForEach(shapes, shape => ScanLineColoring(rgbValues, bitmapWidth, bytesPerPixel, shape, parameters));
+            //foreach (var shape in shapes)
+               
 
             //for (int counter = 0; counter < rgbValues.Length / 3; counter ++)
             //    rgbValues[counter] = 255;
@@ -128,7 +129,7 @@ namespace InfrastructureLayer.Services
             var R = 2 * Vector3.Dot(N, L) * N - L;
 
             var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
-            var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.m));
+            var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
             var r = (actualColor1 + actualColor2).To01();
             return r;
         }

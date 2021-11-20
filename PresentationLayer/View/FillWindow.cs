@@ -36,19 +36,16 @@ namespace PresentationLayer
         private void kdTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.Kd = kdTrackbar.Value / 100.0f;
-            presenter.ColorBitmap();
         }
 
         private void ksTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.Ks = ksTrackbar.Value / 100.0f;
-            presenter.ColorBitmap();
         }
 
         private void mTrackbar_ValueChanged(object sender, EventArgs e)
         {
-            presenter.Parameters.m = mTrackbar.Value;
-            presenter.ColorBitmap();
+            presenter.Parameters.M = mTrackbar.Value;
         }
 
         private void triangulationBar_ValueChanged(object sender, EventArgs e)
@@ -68,10 +65,7 @@ namespace PresentationLayer
         {
             var color = pickColor();
             if (color.HasValue)
-            {
                 presenter.Parameters.LightColor = color.Value;
-                presenter.ColorBitmap();
-            }
             lightColorPreview.Invalidate();
         }
 
@@ -79,17 +73,14 @@ namespace PresentationLayer
         {
             var color = pickColor();
             if (color.HasValue)
-            {
                 presenter.Parameters.SceneColor = color.Value;
-                presenter.ColorBitmap();
-            }
-            scenePreview.Invalidate();
+            sceneColorPreview.Invalidate();
         }
 
-        private void scenePreview_Paint(object sender, PaintEventArgs e)
+        private void sceneColorPreview_Paint(object sender, PaintEventArgs e)
         {
             using Brush brush = new SolidBrush(presenter.Parameters.SceneColor);
-            e.Graphics.FillRectangle(brush, 0, 0, scenePreview.Width, scenePreview.Height);
+            e.Graphics.FillRectangle(brush, 0, 0, sceneColorPreview.Width, sceneColorPreview.Height);
         }
 
         private void lightColorPreview_Paint(object sender, PaintEventArgs e)

@@ -42,7 +42,7 @@ namespace PresentationLayer
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.colorTable = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.scenePreview = new System.Windows.Forms.PictureBox();
+            this.sceneColorPreview = new System.Windows.Forms.PictureBox();
             this.sceneColorButton = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -63,7 +63,7 @@ namespace PresentationLayer
             this.groupBox3.SuspendLayout();
             this.colorTable.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scenePreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sceneColorPreview)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).BeginInit();
             this.SuspendLayout();
@@ -223,7 +223,7 @@ namespace PresentationLayer
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.scenePreview);
+            this.groupBox4.Controls.Add(this.sceneColorPreview);
             this.groupBox4.Controls.Add(this.sceneColorButton);
             this.groupBox4.Controls.Add(this.radioButton2);
             this.groupBox4.Controls.Add(this.radioButton1);
@@ -235,14 +235,14 @@ namespace PresentationLayer
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Scene color";
             // 
-            // scenePreview
+            // sceneColorPreview
             // 
-            this.scenePreview.Location = new System.Drawing.Point(93, 20);
-            this.scenePreview.Name = "scenePreview";
-            this.scenePreview.Size = new System.Drawing.Size(48, 23);
-            this.scenePreview.TabIndex = 3;
-            this.scenePreview.TabStop = false;
-            this.scenePreview.Paint += new System.Windows.Forms.PaintEventHandler(this.scenePreview_Paint);
+            this.sceneColorPreview.Location = new System.Drawing.Point(93, 20);
+            this.sceneColorPreview.Name = "sceneColorPreview";
+            this.sceneColorPreview.Size = new System.Drawing.Size(48, 23);
+            this.sceneColorPreview.TabIndex = 3;
+            this.sceneColorPreview.TabStop = false;
+            this.sceneColorPreview.Paint += new System.Windows.Forms.PaintEventHandler(this.sceneColorPreview_Paint);
             // 
             // sceneColorButton
             // 
@@ -342,7 +342,7 @@ namespace PresentationLayer
             this.colorTable.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scenePreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sceneColorPreview)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).EndInit();
@@ -369,7 +369,7 @@ namespace PresentationLayer
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button sceneColorButton;
-        private System.Windows.Forms.PictureBox scenePreview;
+        private System.Windows.Forms.PictureBox sceneColorPreview;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox lightColorPreview;
