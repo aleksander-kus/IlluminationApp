@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -13,29 +14,49 @@ namespace InfrastructureLayer.Services
         public void DrawSphereEdges(Bitmap bitmap, List<List<Vector3>> sphere)
         {
             using Graphics graphics = Graphics.FromImage(bitmap);
-            Parallel.For(0, sphere.Count, i =>
+            foreach(var shape in sphere)
             {
-                var triangle = sphere[i];
-                for (int i = 0; i < triangle.Count; ++i)
-                {
-                    using Pen p = new Pen(Color.Black, 1);
-                    graphics.DrawLine(p, new Point((int)triangle[i].X, (int)triangle[i].Y), new Point((int)triangle[(i + 1) % triangle.Count].X, (int)triangle[(i + 1) % triangle.Count].Y));
-                }
-            })
-            foreach (var triangle in sphere)
-            {
-
+                using Pen p = new Pen(Color.Black, 1);
+                for(int i = 0; i < shape.Count; ++i)
+                    graphics.DrawLine(p, new Point((int)shape[i].X, (int)shape[i].Y), new Point((int)shape[(i + 1) % shape.Count].X, (int)shape[(i + 1) % shape.Count].Y));
             }
         }
         public void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, Color color, IlluminationParameters parameters)
         {
-            using Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.Clear(Color.Transparent);
+            //using Graphics graphics = Graphics.FromImage(bitmap);
+            //graphics.Clear(Color.Transparent);
+            //foreach (var shape in shapes)
+            //    ScanLineColoring(graphics, shape, parameters);
+            // Create a new bitmap.
+
+            // Lock the bitmap's bits.  
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
+            // Get the address of the first line.
+            IntPtr ptr = bitmapData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int bytes = Math.Abs(bitmapData.Stride) * bitmap.Height;
+            byte[] rgbValues = new byte[bytes];
+            int bytesPerPixel = bitmapData.Stride / bitmap.Width;
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+            // Set every third value to 255. A 24bpp bitmap will look red.  
             foreach (var shape in shapes)
-                ScanLineColoring(graphics, shape, parameters);
+                ScanLineColoring(rgbValues, bitmap.Width, bytesPerPixel, shape, parameters);
+
+            //for (int counter = 0; counter < rgbValues.Length / 3; counter ++)
+            //    rgbValues[counter] = 255;
+
+            // Copy the RGB values back to the bitmap
+            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
+
+            // Unlock the bits.
+            bitmap.UnlockBits(bitmapData);
         }
 
-        private void ScanLineColoring(Graphics graphics, List<Vector3> shape, IlluminationParameters parameters)
+        private void ScanLineColoring(byte[] bitValues, int bitmapWidth, int bytesPerPixel, List<Vector3> shape, IlluminationParameters parameters)
         {
             var P = shape.Select((point, index) => (point.X, point.Y, index)).OrderBy(shape => shape.Y).ToArray();
             List<(int y_max, double x, double m)> AET = new();
@@ -79,8 +100,11 @@ namespace InfrastructureLayer.Services
                 for(int i = 0; i < AET.Count; i += 2)
                     for (int j = (int)Math.Round(AET[i].x); j < AET[i + 1].x; ++j)
                     {
-                        using Brush b = new SolidBrush(ComputeColor(new Vector3(j, y, CalculateZ(j, y, shape[0], shape[1], shape[2])), parameters));
-                        graphics.FillRectangle(b, j, y, 1, 1);
+                        var color = ComputeColor(new Vector3(j, y, CalculateZ(j, y, shape[0], shape[1], shape[2])), parameters);
+                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel] = color.B;
+                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 1] = color.G;
+                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 2] = color.R;
+                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 3] = 255;
                     }
                 // Update the x value for each edge
                 for(int i = 0; i < AET.Count; ++i)
@@ -94,7 +118,7 @@ namespace InfrastructureLayer.Services
         {
             if (point == new Vector3(407, 407, 0))
                 return Color.Black;
-            var I_O = new Vector3(1f, 0.5f, 0.5f);  // the base color of point
+            var I_O = new Vector3(1f, 1f, 1f);  // the base color of point
             var I_L = new Vector3(1, 1, 1);  // light color
             var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
             var V = new Vector3(0, 0, 1);
