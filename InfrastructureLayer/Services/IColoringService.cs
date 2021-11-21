@@ -8,6 +8,6 @@ namespace InfrastructureLayer.Services
     public interface IColoringService
     {
         void DrawSphereEdges(Bitmap bitmap, List<List<Vector3>> shapes);
-        void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, Color color, IlluminationParameters parameters);
+        void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, IlluminationParameters parameters);
     }
 }

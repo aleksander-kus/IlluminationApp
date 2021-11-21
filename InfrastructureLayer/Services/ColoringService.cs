@@ -21,14 +21,8 @@ namespace InfrastructureLayer.Services
                     graphics.DrawLine(p, new Point((int)shape[i].X, (int)shape[i].Y), new Point((int)shape[(i + 1) % shape.Count].X, (int)shape[(i + 1) % shape.Count].Y));
             }
         }
-        public void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, Color color, IlluminationParameters parameters)
+        public void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, IlluminationParameters parameters)
         {
-            //using Graphics graphics = Graphics.FromImage(bitmap);
-            //graphics.Clear(Color.Transparent);
-            //foreach (var shape in shapes)
-            //    ScanLineColoring(graphics, shape, parameters);
-            // Create a new bitmap.
-
             // Lock the bitmap's bits.  
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
@@ -36,30 +30,16 @@ namespace InfrastructureLayer.Services
             IntPtr ptr = bitmapData.Scan0;
 
             // Declare an array to hold the bytes of the bitmap.
-            int bytes = Math.Abs(bitmapData.Stride) * bitmap.Height;
-            byte[] rgbValues = new byte[bytes];
-            int bytesPerPixel = bitmapData.Stride / bitmap.Width;
-            // Copy the RGB values into the array.
-            //System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
-            int bitmapWidth = bitmap.Width;
-            // Set every third value to 255. A 24bpp bitmap will look red.  
-            Parallel.ForEach(shapes, shape => ScanLineColoring(rgbValues, bitmapWidth, bytesPerPixel, shape, parameters));
-            //foreach (var shape in shapes)
-            //    ScanLineColoring(rgbValues, bitmapWidth, bytesPerPixel, shape, parameters);
-            //foreach (var shape in shapes)
-
-
-            //for (int counter = 0; counter < rgbValues.Length / 3; counter ++)
-            //    rgbValues[counter] = 255;
-
+            ByteBitmap byteBitmap = new(bitmap.Width, bitmap.Height, bitmapData.Stride / bitmap.Width);
+            Parallel.ForEach(shapes, shape => ScanLineColoring(byteBitmap, shape, parameters));
             // Copy the RGB values back to the bitmap
-            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
+            System.Runtime.InteropServices.Marshal.Copy(byteBitmap.Bitmap, 0, ptr, byteBitmap.Bitmap.Length);
 
             // Unlock the bits.
             bitmap.UnlockBits(bitmapData);
         }
 
-        private void ScanLineColoring(byte[] bitValues, int bitmapWidth, int bytesPerPixel, List<Vector3> shape, IlluminationParameters parameters)
+        private void ScanLineColoring(ByteBitmap bitmap, List<Vector3> shape, IlluminationParameters parameters)
         {
             var P = shape.Select((point, index) => (point.X, point.Y, index)).OrderBy(shape => shape.Y).ToArray();
             List<(int y_max, double x, double m)> AET = new();
@@ -104,10 +84,7 @@ namespace InfrastructureLayer.Services
                     for (int j = (int)Math.Round(AET[i].x); j < AET[i + 1].x; ++j)
                     {
                         var color = ComputeColor(new Vector3(j, y, CalculateZ(j, y, shape[0], shape[1], shape[2])), parameters);
-                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel] = color.B;
-                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 1] = color.G;
-                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 2] = color.R;
-                        bitValues[y * bitmapWidth * bytesPerPixel + j * bytesPerPixel + 3] = 255;
+                        bitmap.SetPixel(j, y, color);
                     }
                 // Update the x value for each edge
                 for(int i = 0; i < AET.Count; ++i)
@@ -120,7 +97,7 @@ namespace InfrastructureLayer.Services
         private Color ComputeColor(Vector3 point, IlluminationParameters parameters)
         {
             if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
-                return Color.Black;
+                return parameters.SceneColor;
             var I_O = parameters.SceneColor.From255();  // the base color of point
             var I_L = parameters.LightColor.From255();  // light color
             var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
@@ -149,7 +126,5 @@ namespace InfrastructureLayer.Services
 
             return z;
         }
-
-        private Vector3 SubstractVectors(Vector3 vec1, Vector3 vec2) => new Vector3(vec2.X - vec1.X, vec2.Y - vec1.Y, vec2.Z - vec1.Z);
     }
 }

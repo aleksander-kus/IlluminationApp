@@ -36,8 +36,14 @@ namespace PresentationLayer
             this.triangulationBar = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.kdLabel = new System.Windows.Forms.Label();
             this.kdTrackbar = new System.Windows.Forms.TrackBar();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.ksLabel = new System.Windows.Forms.Label();
             this.ksTrackbar = new System.Windows.Forms.TrackBar();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.mLabel = new System.Windows.Forms.Label();
             this.mTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.colorTable = new System.Windows.Forms.TableLayoutPanel();
@@ -57,8 +63,11 @@ namespace PresentationLayer
             ((System.ComponentModel.ISupportInitialize)(this.triangulationBar)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kdTrackbar)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ksTrackbar)).BeginInit();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mTrackbar)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.colorTable.SuspendLayout();
@@ -129,7 +138,7 @@ namespace PresentationLayer
             this.triangulationBar.Name = "triangulationBar";
             this.triangulationBar.Size = new System.Drawing.Size(335, 51);
             this.triangulationBar.TabIndex = 0;
-            this.triangulationBar.Value = 2;
+            this.triangulationBar.Value = 10;
             this.triangulationBar.ValueChanged += new System.EventHandler(this.triangulationBar_ValueChanged);
             // 
             // groupBox2
@@ -147,9 +156,9 @@ namespace PresentationLayer
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.kdTrackbar, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.ksTrackbar, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.mTrackbar, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.panel3, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.panel4, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -160,37 +169,94 @@ namespace PresentationLayer
             this.tableLayoutPanel3.Size = new System.Drawing.Size(335, 167);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.kdLabel);
+            this.panel2.Controls.Add(this.kdTrackbar);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(329, 49);
+            this.panel2.TabIndex = 3;
+            // 
+            // kdLabel
+            // 
+            this.kdLabel.AutoSize = true;
+            this.kdLabel.Location = new System.Drawing.Point(145, 30);
+            this.kdLabel.Name = "kdLabel";
+            this.kdLabel.Size = new System.Drawing.Size(23, 15);
+            this.kdLabel.TabIndex = 2;
+            this.kdLabel.Text = "kd:";
+            // 
             // kdTrackbar
             // 
             this.kdTrackbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kdTrackbar.Location = new System.Drawing.Point(3, 3);
+            this.kdTrackbar.Location = new System.Drawing.Point(0, 0);
             this.kdTrackbar.Maximum = 100;
             this.kdTrackbar.Name = "kdTrackbar";
             this.kdTrackbar.Size = new System.Drawing.Size(329, 49);
-            this.kdTrackbar.TabIndex = 0;
+            this.kdTrackbar.TabIndex = 1;
             this.kdTrackbar.Value = 50;
             this.kdTrackbar.ValueChanged += new System.EventHandler(this.kdTrackbar_ValueChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.ksLabel);
+            this.panel3.Controls.Add(this.ksTrackbar);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 58);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(329, 49);
+            this.panel3.TabIndex = 4;
+            // 
+            // ksLabel
+            // 
+            this.ksLabel.AutoSize = true;
+            this.ksLabel.Location = new System.Drawing.Point(145, 32);
+            this.ksLabel.Name = "ksLabel";
+            this.ksLabel.Size = new System.Drawing.Size(21, 15);
+            this.ksLabel.TabIndex = 3;
+            this.ksLabel.Text = "ks:";
             // 
             // ksTrackbar
             // 
             this.ksTrackbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ksTrackbar.Location = new System.Drawing.Point(3, 58);
+            this.ksTrackbar.Location = new System.Drawing.Point(0, 0);
             this.ksTrackbar.Maximum = 100;
             this.ksTrackbar.Name = "ksTrackbar";
             this.ksTrackbar.Size = new System.Drawing.Size(329, 49);
-            this.ksTrackbar.TabIndex = 1;
+            this.ksTrackbar.TabIndex = 2;
             this.ksTrackbar.Value = 50;
             this.ksTrackbar.ValueChanged += new System.EventHandler(this.ksTrackbar_ValueChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.mLabel);
+            this.panel4.Controls.Add(this.mTrackbar);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 113);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(329, 51);
+            this.panel4.TabIndex = 5;
+            // 
+            // mLabel
+            // 
+            this.mLabel.AutoSize = true;
+            this.mLabel.Location = new System.Drawing.Point(145, 34);
+            this.mLabel.Name = "mLabel";
+            this.mLabel.Size = new System.Drawing.Size(21, 15);
+            this.mLabel.TabIndex = 4;
+            this.mLabel.Text = "m:";
             // 
             // mTrackbar
             // 
             this.mTrackbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mTrackbar.Location = new System.Drawing.Point(3, 113);
+            this.mTrackbar.Location = new System.Drawing.Point(0, 0);
             this.mTrackbar.Maximum = 100;
             this.mTrackbar.Minimum = 1;
             this.mTrackbar.Name = "mTrackbar";
             this.mTrackbar.Size = new System.Drawing.Size(329, 51);
-            this.mTrackbar.TabIndex = 2;
+            this.mTrackbar.TabIndex = 3;
             this.mTrackbar.Value = 50;
             this.mTrackbar.ValueChanged += new System.EventHandler(this.mTrackbar_ValueChanged);
             // 
@@ -334,9 +400,14 @@ namespace PresentationLayer
             ((System.ComponentModel.ISupportInitialize)(this.triangulationBar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kdTrackbar)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ksTrackbar)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mTrackbar)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.colorTable.ResumeLayout(false);
@@ -359,9 +430,6 @@ namespace PresentationLayer
         private System.Windows.Forms.TrackBar triangulationBar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TrackBar kdTrackbar;
-        private System.Windows.Forms.TrackBar ksTrackbar;
-        private System.Windows.Forms.TrackBar mTrackbar;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TableLayoutPanel colorTable;
         private System.Windows.Forms.Button changeLightButton;
@@ -373,5 +441,14 @@ namespace PresentationLayer
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox lightColorPreview;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TrackBar kdTrackbar;
+        private System.Windows.Forms.Label kdLabel;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label ksLabel;
+        private System.Windows.Forms.TrackBar ksTrackbar;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label mLabel;
+        private System.Windows.Forms.TrackBar mTrackbar;
     }
 }

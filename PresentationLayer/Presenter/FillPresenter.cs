@@ -11,7 +11,7 @@ namespace PresentationLayer
         private readonly IFillView view;
         private readonly Bitmap bitmap;
         private List<List<Vector3>> triangulatedSphere;
-        private int triangulationPrecision = 2;
+        private int triangulationPrecision;
         public int TriangulationPrecision { 
             set
             {
@@ -20,7 +20,7 @@ namespace PresentationLayer
                 ColorBitmap();
             }
         }
-        public IlluminationParameters Parameters = new();
+        public IlluminationParameters Parameters;
         private readonly ITriangulationService triangulationService;
         private readonly IColoringService coloringService;
 
@@ -40,14 +40,9 @@ namespace PresentationLayer
             };
             Parameters.Radius = view.CanvasSizeX / 2;
             Parameters.PropertyChanged += Parameters_PropertyChanged;
-            CalculateTriangulation();
-            ColorBitmap();
         }
 
-        private void Parameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            ColorBitmap();
-        }
+        private void Parameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) => ColorBitmap();
 
         private void CalculateTriangulation() =>
             triangulatedSphere = triangulationService.TriangulateSphere(bitmap.Height / 2, bitmap.Width / 2, bitmap.Height / 2, triangulationPrecision);
@@ -55,7 +50,7 @@ namespace PresentationLayer
         private void ColorBitmap()
         {
             view.CanvasImage = new Bitmap(bitmap);
-            coloringService.FillTriangles(bitmap, triangulatedSphere, Color.Green, Parameters);
+            coloringService.FillTriangles(bitmap, triangulatedSphere, Parameters);
             coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
             view.CanvasImage = bitmap;
             view.Redraw();

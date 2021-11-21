@@ -31,21 +31,27 @@ namespace PresentationLayer
             MaximizeBox = false;
             MinimizeBox = false;
             presenter.TriangulationPrecision = triangulationBar.Value;
+            kdLabel.Text = $"kd: {kdTrackbar.Value / 100.0f:0.00}";
+            ksLabel.Text = $"ks: {ksTrackbar.Value / 100.0f:0.00}";
+            mLabel.Text = $"m: {mTrackbar.Value}";
         }
 
         private void kdTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.Kd = kdTrackbar.Value / 100.0f;
+            kdLabel.Text = $"kd: {kdTrackbar.Value / 100.0f:0.00}";
         }
 
         private void ksTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.Ks = ksTrackbar.Value / 100.0f;
+            ksLabel.Text = $"ks: {ksTrackbar.Value / 100.0f:0.00}";
         }
 
         private void mTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.M = mTrackbar.Value;
+            mLabel.Text = $"m: {mTrackbar.Value}";
         }
 
         private void triangulationBar_ValueChanged(object sender, EventArgs e)
