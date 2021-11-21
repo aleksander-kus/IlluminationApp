@@ -17,8 +17,8 @@ namespace InfrastructureLayer.Services
             // normal versor gotten from ball
             var N_ball = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));
             var color = parameters.NormalMap.GetPixel((int)point.X, (int)point.Y);
-
-            var N_normalMap = Vector3.Normalize(new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f / 0x8f * new Vector3(1, -1, 1));
+            var matrix = GetMatrix(N_ball);
+            var N_normalMap = MatrixTimesVector(matrix, Vector3.Normalize(2 * new Vector3(color.R, color.G, color.B) - Vector3.One));
             //var N_normalMap = Rebase(new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f / 0x8f * new Vector3(1, -1, 1), Vector3.Normalize(N_ball));
             var N = Vector3.Normalize(N_ball * parameters.K + N_normalMap * (1 - parameters.K));
             // additional versors
@@ -35,6 +35,22 @@ namespace InfrastructureLayer.Services
         private static Color GetColorFromTexture(Vector3 point, IlluminationParameters parameters)
         {
             return parameters.Texture.GetPixel((int)point.X, (int)point.Y);
+        }
+
+        private static Vector3[] GetMatrix(Vector3 N_ball)
+        {
+            var B = (N_ball == new Vector3(0, 0, 1) ? new Vector3(0, 1, 0) : Vector3.Cross(N_ball, new Vector3(0, 0, 1)));
+            var T = Vector3.Cross(B, N_ball);
+            return new[] { T, B, N_ball };
+        }
+
+        private static Vector3 MatrixTimesVector(Vector3[] matrix, Vector3 vector)
+        {
+            var result = Vector3.Zero;
+            result.X = matrix[0].X * vector.X + matrix[1].X * vector.Y + matrix[2].X * vector.Z;
+            result.Z = matrix[0].Y * vector.X + matrix[1].Y * vector.Y + matrix[2].Y * vector.Z;
+            result.Z = matrix[0].Z * vector.X + matrix[1].Z * vector.Y + matrix[2].Z * vector.Z;
+            return result;
         }
 
         private static Vector3 Rebase(Vector3 v, Vector3 n)
