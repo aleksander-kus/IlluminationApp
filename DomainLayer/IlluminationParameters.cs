@@ -11,6 +11,16 @@ namespace DomainLayer
 {
     public class IlluminationParameters : INotifyPropertyChanged
     {
+        private float k = 0.0f;
+        public float K
+        {
+            get => k;
+            set
+            {
+                k = value;
+                OnPropertyChanged(nameof(K));
+            }
+        }
         private float kd = 0.5f;
         public float Kd { 
             get => kd;

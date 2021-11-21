@@ -8,6 +8,7 @@ namespace PresentationLayer
     {
         public Timer Timer { get; set; } = new();
         private FillPresenter presenter;
+        private bool isMouseDown = false;
         public FillWindow()
         {
             InitializeComponent();
@@ -36,6 +37,8 @@ namespace PresentationLayer
             ksLabel.Text = $"ks: {ksTrackbar.Value / 100.0f:0.00}";
             mLabel.Text = $"m: {mTrackbar.Value}";
             zLabel.Text = $"Source height (z): {zTrackbar.Value}";
+            kLabel.Text = $"k: {kTrackbar.Value / 100.0f:0.00}";
+
         }
 
         private void kdTrackbar_ValueChanged(object sender, EventArgs e)
@@ -59,6 +62,11 @@ namespace PresentationLayer
         {
             presenter.Parameters.Z = zTrackbar.Value;
             zLabel.Text = $"Source height (z): {zTrackbar.Value}";
+        }
+        private void kTrackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.K = kTrackbar.Value / 100.0f;
+            kLabel.Text = $"k: {kTrackbar.Value / 100.0f:0.00}";
         }
 
         private void triangulationBar_ValueChanged(object sender, EventArgs e)
@@ -128,6 +136,24 @@ namespace PresentationLayer
         {
             presenter.ResetAnimation();
             Timer.Stop();
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            presenter.RegisterClick(e.Location);
+            isMouseDown = true;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+                presenter.RegisterMouseMove(e.Location);
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            presenter.RegisterMouseUp();
+            isMouseDown = false;
         }
     }
 }

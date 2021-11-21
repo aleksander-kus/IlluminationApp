@@ -48,6 +48,8 @@ namespace PresentationLayer
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.colorTable = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.kLabel = new System.Windows.Forms.Label();
+            this.kTrackbar = new System.Windows.Forms.TrackBar();
             this.sceneColorPreview = new System.Windows.Forms.PictureBox();
             this.sceneColorButton = new System.Windows.Forms.Button();
             this.textureRadioButton = new System.Windows.Forms.RadioButton();
@@ -79,6 +81,7 @@ namespace PresentationLayer
             this.groupBox3.SuspendLayout();
             this.colorTable.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sceneColorPreview)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).BeginInit();
@@ -95,6 +98,9 @@ namespace PresentationLayer
             this.pictureBox1.Size = new System.Drawing.Size(815, 815);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // tableLayoutPanel1
             // 
@@ -282,7 +288,7 @@ namespace PresentationLayer
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 277);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(341, 171);
+            this.groupBox3.Size = new System.Drawing.Size(341, 190);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colors";
@@ -300,22 +306,43 @@ namespace PresentationLayer
             this.colorTable.RowCount = 2;
             this.colorTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.46309F));
             this.colorTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.53691F));
-            this.colorTable.Size = new System.Drawing.Size(335, 149);
+            this.colorTable.Size = new System.Drawing.Size(335, 168);
             this.colorTable.TabIndex = 0;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.kLabel);
+            this.groupBox4.Controls.Add(this.kTrackbar);
             this.groupBox4.Controls.Add(this.sceneColorPreview);
             this.groupBox4.Controls.Add(this.sceneColorButton);
             this.groupBox4.Controls.Add(this.textureRadioButton);
             this.groupBox4.Controls.Add(this.solidColorRadioButton);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 32);
+            this.groupBox4.Location = new System.Drawing.Point(3, 35);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(329, 114);
+            this.groupBox4.Size = new System.Drawing.Size(329, 130);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Scene color";
+            // 
+            // kLabel
+            // 
+            this.kLabel.AutoSize = true;
+            this.kLabel.Location = new System.Drawing.Point(145, 112);
+            this.kLabel.Name = "kLabel";
+            this.kLabel.Size = new System.Drawing.Size(16, 15);
+            this.kLabel.TabIndex = 5;
+            this.kLabel.Text = "k:";
+            // 
+            // kTrackbar
+            // 
+            this.kTrackbar.Location = new System.Drawing.Point(0, 85);
+            this.kTrackbar.Maximum = 100;
+            this.kTrackbar.Name = "kTrackbar";
+            this.kTrackbar.Size = new System.Drawing.Size(329, 45);
+            this.kTrackbar.TabIndex = 4;
+            this.kTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.kTrackbar.ValueChanged += new System.EventHandler(this.kTrackBar1_ValueChanged);
             // 
             // sceneColorPreview
             // 
@@ -368,7 +395,7 @@ namespace PresentationLayer
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 23);
+            this.panel1.Size = new System.Drawing.Size(329, 26);
             this.panel1.TabIndex = 2;
             // 
             // lightColorPreview
@@ -404,7 +431,7 @@ namespace PresentationLayer
             // 
             this.groupBox5.Controls.Add(this.panel5);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 454);
+            this.groupBox5.Location = new System.Drawing.Point(3, 473);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(341, 100);
             this.groupBox5.TabIndex = 3;
@@ -506,6 +533,7 @@ namespace PresentationLayer
             this.colorTable.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sceneColorPreview)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -554,5 +582,7 @@ namespace PresentationLayer
         private System.Windows.Forms.Button stopAnimationButton;
         private System.Windows.Forms.Button startAnimationButton;
         private System.Windows.Forms.Button resetAnimationButton;
+        private System.Windows.Forms.Label kLabel;
+        private System.Windows.Forms.TrackBar kTrackbar;
     }
 }

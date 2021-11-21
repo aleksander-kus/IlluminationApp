@@ -9,7 +9,6 @@ namespace InfrastructureLayer.Services
     {
         public Color ComputeColor(Vector3 point, IlluminationParameters parameters)
         {
-            float k = 1f;
             if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
                 return parameters.SceneColor;
             // the base color of point
@@ -21,8 +20,9 @@ namespace InfrastructureLayer.Services
             var N_ball = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));
             var color = parameters.NormalMap.GetPixel((int)point.X, (int)point.Y);
 
-            var N_normalMap = Rebase((new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f) / 0x8f * new Vector3(1, -1, 1), Vector3.Normalize(N_ball));
-            var N = Vector3.Normalize(N_ball * k + N_normalMap * (1 - k));
+            var N_normalMap = Vector3.Normalize(new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f / 0x8f * new Vector3(1, -1, 1));
+            //var N_normalMap = Rebase(new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f / 0x8f * new Vector3(1, -1, 1), Vector3.Normalize(N_ball));
+            var N = Vector3.Normalize(N_ball * parameters.K + N_normalMap * (1 - parameters.K));
             // additional versors
             var V = new Vector3(0, 0, 1);
             var sourceLocation = new Vector3(parameters.LightSourcePosition.X, parameters.LightSourcePosition.Y, parameters.Radius + parameters.Z);
@@ -31,6 +31,8 @@ namespace InfrastructureLayer.Services
 
             var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
             var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
+            if (actualColor1.X + actualColor2.X < 0)
+                return parameters.SceneColor;
             return (actualColor1 + actualColor2).To255();
         }
 

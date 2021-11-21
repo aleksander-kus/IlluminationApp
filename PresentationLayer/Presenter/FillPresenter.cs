@@ -28,6 +28,7 @@ namespace PresentationLayer
         private readonly IAnimationService animationService;
         private readonly ITriangulationService triangulationService;
         private readonly IFillingService coloringService;
+        private List<(int shapeID, int vertexID)> movingVertex = new();
 
         public FillPresenter(IFillView view)
         {
@@ -55,6 +56,35 @@ namespace PresentationLayer
             Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
             //LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg");
         }
+
+        private static int SquaredDistance(Point p1, Point p2) => (p2.X - p1.X) * (p2.X - p1.X) + (p2.Y - p1.Y) * (p2.Y - p1.Y);
+
+        private static bool IsPointClicked(Point point, Point mousePosition, int epsilon = 10) => SquaredDistance(point, mousePosition) <= epsilon * epsilon;
+
+        public void RegisterClick(Point point)
+        {
+            for(int i = 0; i < triangulatedSphere.Count; ++i)
+            {
+                for(int j = 0; j < triangulatedSphere[i].Count; ++j)
+                {
+                    if(IsPointClicked(new Point((int)triangulatedSphere[i][j].X, (int)triangulatedSphere[i][j].Y), point))
+                    {
+                        movingVertex.Add((i, j));
+                    }
+                }
+            }
+        }
+
+        public void RegisterMouseMove(Point point)
+        {
+            if (movingVertex.Count > 0)
+            {
+                movingVertex.ForEach(vertex => triangulatedSphere[vertex.shapeID][vertex.vertexID] = new Vector3(point.X, point.Y, triangulatedSphere[vertex.shapeID][vertex.vertexID].Z));
+                ColorBitmap();
+            }
+        }
+
+        public void RegisterMouseUp() => movingVertex.Clear();
 
         public void ResetAnimation()
         {
