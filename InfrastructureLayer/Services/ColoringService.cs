@@ -40,12 +40,14 @@ namespace InfrastructureLayer.Services
             byte[] rgbValues = new byte[bytes];
             int bytesPerPixel = bitmapData.Stride / bitmap.Width;
             // Copy the RGB values into the array.
-            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+            //System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
             int bitmapWidth = bitmap.Width;
             // Set every third value to 255. A 24bpp bitmap will look red.  
             Parallel.ForEach(shapes, shape => ScanLineColoring(rgbValues, bitmapWidth, bytesPerPixel, shape, parameters));
             //foreach (var shape in shapes)
-               
+            //    ScanLineColoring(rgbValues, bitmapWidth, bytesPerPixel, shape, parameters);
+            //foreach (var shape in shapes)
+
 
             //for (int counter = 0; counter < rgbValues.Length / 3; counter ++)
             //    rgbValues[counter] = 255;
@@ -117,10 +119,10 @@ namespace InfrastructureLayer.Services
         }
         private Color ComputeColor(Vector3 point, IlluminationParameters parameters)
         {
-            if (point == new Vector3(parameters.Radius, parameters.Radius, 0))
+            if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
                 return Color.Black;
-            var I_O = parameters.SceneColor.From01();  // the base color of point
-            var I_L = parameters.LightColor.From01();  // light color
+            var I_O = parameters.SceneColor.From255();  // the base color of point
+            var I_L = parameters.LightColor.From255();  // light color
             var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
             var V = new Vector3(0, 0, 1);
             var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius * 2);
@@ -130,7 +132,7 @@ namespace InfrastructureLayer.Services
 
             var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
             var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
-            var r = (actualColor1 + actualColor2).To01();
+            var r = (actualColor1 + actualColor2).To255();
             return r;
         }
 

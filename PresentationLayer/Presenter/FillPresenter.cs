@@ -11,7 +11,7 @@ namespace PresentationLayer
         private readonly IFillView view;
         private readonly Bitmap bitmap;
         private List<List<Vector3>> triangulatedSphere;
-        private int triangulationPrecision = 11;
+        private int triangulationPrecision = 2;
         public int TriangulationPrecision { 
             set
             {
@@ -56,7 +56,7 @@ namespace PresentationLayer
         {
             view.CanvasImage = new Bitmap(bitmap);
             coloringService.FillTriangles(bitmap, triangulatedSphere, Color.Green, Parameters);
-            //coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
+            coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
             view.CanvasImage = bitmap;
             view.Redraw();
         }

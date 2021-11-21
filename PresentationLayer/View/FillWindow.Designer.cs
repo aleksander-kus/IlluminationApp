@@ -129,7 +129,7 @@ namespace PresentationLayer
             this.triangulationBar.Name = "triangulationBar";
             this.triangulationBar.Size = new System.Drawing.Size(335, 51);
             this.triangulationBar.TabIndex = 0;
-            this.triangulationBar.Value = 10;
+            this.triangulationBar.Value = 2;
             this.triangulationBar.ValueChanged += new System.EventHandler(this.triangulationBar_ValueChanged);
             // 
             // groupBox2
