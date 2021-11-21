@@ -33,7 +33,8 @@ namespace InfrastructureLayer.Services
             // Lock the bitmap's bits.  
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
             ByteBitmap byteBitmap = new(bitmap.Width, bitmap.Height, bitmapData.Stride / bitmap.Width);
-            Parallel.ForEach(shapes, shape => ScanLineColoring(byteBitmap, shape, parameters));
+            shapes.ForEach(shape => ScanLineColoring(byteBitmap, shape, parameters));
+            //Parallel.ForEach(shapes, shape => ScanLineColoring(byteBitmap, shape, parameters));
             // Copy the RGB values back to the bitmap
             System.Runtime.InteropServices.Marshal.Copy(byteBitmap.Bitmap, 0, bitmapData.Scan0, byteBitmap.Bitmap.Length);
 

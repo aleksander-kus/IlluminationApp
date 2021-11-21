@@ -31,7 +31,7 @@ namespace InfrastructureLayer.Services
 
         public Color GetColorFromTexture(Vector3 point, IlluminationParameters parameters)
         {
-            return Color.White;
+            return parameters.Texture.GetPixel((int)point.X, (int)point.Y);
         }
 
         private static float CosineBetweenVectors(Vector3 vec1, Vector3 vec2)

@@ -58,6 +58,7 @@ namespace PresentationLayer
             this.changeLightButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.resetAnimationButton = new System.Windows.Forms.Button();
             this.zLabel = new System.Windows.Forms.Label();
             this.stopAnimationButton = new System.Windows.Forms.Button();
             this.startAnimationButton = new System.Windows.Forms.Button();
@@ -412,6 +413,7 @@ namespace PresentationLayer
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.resetAnimationButton);
             this.panel5.Controls.Add(this.zLabel);
             this.panel5.Controls.Add(this.stopAnimationButton);
             this.panel5.Controls.Add(this.startAnimationButton);
@@ -421,6 +423,16 @@ namespace PresentationLayer
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(335, 78);
             this.panel5.TabIndex = 0;
+            // 
+            // resetAnimationButton
+            // 
+            this.resetAnimationButton.Location = new System.Drawing.Point(249, 51);
+            this.resetAnimationButton.Name = "resetAnimationButton";
+            this.resetAnimationButton.Size = new System.Drawing.Size(77, 23);
+            this.resetAnimationButton.TabIndex = 4;
+            this.resetAnimationButton.Text = "Reset";
+            this.resetAnimationButton.UseVisualStyleBackColor = true;
+            this.resetAnimationButton.Click += new System.EventHandler(this.resetAnimationButton_Click);
             // 
             // zLabel
             // 
@@ -433,27 +445,29 @@ namespace PresentationLayer
             // 
             // stopAnimationButton
             // 
-            this.stopAnimationButton.Location = new System.Drawing.Point(207, 51);
+            this.stopAnimationButton.Location = new System.Drawing.Point(133, 51);
             this.stopAnimationButton.Name = "stopAnimationButton";
-            this.stopAnimationButton.Size = new System.Drawing.Size(103, 23);
+            this.stopAnimationButton.Size = new System.Drawing.Size(77, 23);
             this.stopAnimationButton.TabIndex = 2;
-            this.stopAnimationButton.Text = "Stop animation";
+            this.stopAnimationButton.Text = "Stop";
             this.stopAnimationButton.UseVisualStyleBackColor = true;
+            this.stopAnimationButton.Click += new System.EventHandler(this.stopAnimationButton_Click);
             // 
             // startAnimationButton
             // 
-            this.startAnimationButton.Location = new System.Drawing.Point(27, 51);
+            this.startAnimationButton.Location = new System.Drawing.Point(13, 51);
             this.startAnimationButton.Name = "startAnimationButton";
-            this.startAnimationButton.Size = new System.Drawing.Size(103, 23);
+            this.startAnimationButton.Size = new System.Drawing.Size(77, 23);
             this.startAnimationButton.TabIndex = 1;
-            this.startAnimationButton.Text = "Start animation";
+            this.startAnimationButton.Text = "Start";
             this.startAnimationButton.UseVisualStyleBackColor = true;
+            this.startAnimationButton.Click += new System.EventHandler(this.startAnimationButton_Click);
             // 
             // zTrackbar
             // 
             this.zTrackbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.zTrackbar.Location = new System.Drawing.Point(0, 0);
-            this.zTrackbar.Maximum = 400;
+            this.zTrackbar.Maximum = 800;
             this.zTrackbar.Name = "zTrackbar";
             this.zTrackbar.Size = new System.Drawing.Size(335, 45);
             this.zTrackbar.TabIndex = 0;
@@ -539,5 +553,6 @@ namespace PresentationLayer
         private System.Windows.Forms.Label zLabel;
         private System.Windows.Forms.Button stopAnimationButton;
         private System.Windows.Forms.Button startAnimationButton;
+        private System.Windows.Forms.Button resetAnimationButton;
     }
 }

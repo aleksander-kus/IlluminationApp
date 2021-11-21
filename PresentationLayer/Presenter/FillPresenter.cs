@@ -3,6 +3,7 @@ using InfrastructureLayer;
 using InfrastructureLayer.Services;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Numerics;
 
 namespace PresentationLayer
@@ -22,7 +23,8 @@ namespace PresentationLayer
             }
         }
         public IlluminationParameters Parameters { get; set; }
-        public int AnimationTime { get; set; } = 5000;
+        public int AnimationTime { get; set; } = 10000;
+        public int AnimationInterval { get; set; } = 10;
         private readonly IAnimationService animationService;
         private readonly ITriangulationService triangulationService;
         private readonly IFillingService coloringService;
@@ -32,24 +34,44 @@ namespace PresentationLayer
             this.view = view;
             bitmap = new(view.CanvasSizeX, view.CanvasSizeY);
             this.view.CanvasImage = bitmap;
-            this.view.Timer.Interval = AnimationTime;
+            this.view.Timer.Interval = AnimationInterval;
             this.view.Timer.Tick += Timer_Tick;
             
-            triangulationService = new TriService();
-            coloringService = new FillingService(new ColorService());
-            animationService = new AnimationService(AnimationTime, Parameters);
             Parameters = new()
             {
                 Radius = view.CanvasSizeX / 2,
+                CanvasX = view.CanvasSizeX,
+                CanvasY = view.CanvasSizeY,
                 SceneColor = Color.Green,
                 LightColor = Color.White,
                 LightSourcePosition = new Point(view.CanvasSizeX / 2, view.CanvasSizeY / 2)
             };
             Parameters.Radius = view.CanvasSizeX / 2;
             Parameters.PropertyChanged += Parameters_PropertyChanged;
+            triangulationService = new TriService();
+            coloringService = new FillingService(new ColorService());
+            animationService = new AnimationService(AnimationInterval, AnimationTime, Parameters);
+            //LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\Basketball.png");
+            //Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
+            LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg");
         }
 
-        private void Timer_Tick(object sender, System.EventArgs e) => animationService.AnimateFrame();
+        public void ResetAnimation()
+        {
+            animationService.ResetAnimation();
+            ColorBitmap();
+        }
+
+        private void LoadTexture(string path)
+        {
+            Parameters.Texture = new ByteBitmap((Bitmap)Image.FromFile(path));
+        }
+
+        private void Timer_Tick(object sender, System.EventArgs e)
+        {
+            animationService.AnimateFrame();
+            ColorBitmap();
+        }
 
         private void Parameters_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) => ColorBitmap();
 

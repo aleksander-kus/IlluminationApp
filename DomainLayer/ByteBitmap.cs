@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +30,38 @@ namespace DomainLayer
             bitmap = new byte[Width * Height * BytesPerPixel];
         }
 
+        public ByteBitmap(Bitmap b)
+        {
+            BitmapData bitmapData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, b.PixelFormat);
+            Width = b.Width;
+            Height = b.Height;
+            BytesPerPixel = bitmapData.Stride / b.Width;
+            bitmap = new byte[Width * Height * BytesPerPixel];
+            System.Runtime.InteropServices.Marshal.Copy(bitmapData.Scan0, bitmap, 0, bitmap.Length);
+            b.UnlockBits(bitmapData);
+        }
+
         public void SetPixel(int x, int y, Color color)
         {
             bitmap[y * Width * BytesPerPixel + x * BytesPerPixel] = color.B;
             bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 1] = color.G;
             bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 2] = color.R;
             bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 3] = color.A;
+        }
+
+        public Color GetPixel(int x, int y)
+        {
+            x %= Width;
+            y %= Height;
+            var r = bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 2];
+            var g = bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 1];
+            var b = bitmap[y * Width * BytesPerPixel + x * BytesPerPixel];
+            if(BytesPerPixel == 4)
+            {
+                var a = bitmap[y * Width * BytesPerPixel + x * BytesPerPixel + 3];
+                return Color.FromArgb(a, r, g, b);
+            }
+            return Color.FromArgb(r, g, b);
         }
     }
 }

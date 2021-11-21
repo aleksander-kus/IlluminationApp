@@ -113,5 +113,21 @@ namespace PresentationLayer
             solidColorRadioButton.Checked = false;
             presenter.Parameters.ColoringMode = DomainLayer.ColoringMode.Texture;
         }
+
+        private void startAnimationButton_Click(object sender, EventArgs e)
+        {
+            Timer.Start();
+        }
+
+        private void stopAnimationButton_Click(object sender, EventArgs e)
+        {
+            Timer.Stop();
+        }
+
+        private void resetAnimationButton_Click(object sender, EventArgs e)
+        {
+            presenter.ResetAnimation();
+            Timer.Stop();
+        }
     }
 }

@@ -70,6 +70,9 @@ namespace DomainLayer
             }
         }
 
+        public ByteBitmap Texture { get; set; }
+        public ByteBitmap NormalMap { get; set; }
+
         private ColoringMode coloringMode = ColoringMode.SolidColor;
         public ColoringMode ColoringMode
         {
@@ -96,6 +99,10 @@ namespace DomainLayer
         }
 
         public int Radius { get; set; }
+
+        public int CanvasX { get; set; }
+
+        public int CanvasY { get; set; }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
