@@ -51,9 +51,9 @@ namespace PresentationLayer
             triangulationService = new TriService();
             coloringService = new FillingService(new ColorService());
             animationService = new AnimationService(AnimationInterval, AnimationTime, Parameters);
-            //LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\Basketball.png");
-            //Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
-            LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg");
+            LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\Basketball.png");
+            Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
+            //LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg");
         }
 
         public void ResetAnimation()
