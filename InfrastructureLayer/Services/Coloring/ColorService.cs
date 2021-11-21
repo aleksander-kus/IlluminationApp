@@ -16,10 +16,9 @@ namespace InfrastructureLayer.Services
             var I_L = parameters.LightColor.From255();
             // normal versor gotten from ball
             var N_ball = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));
-            var color = parameters.NormalMap.GetPixel((int)point.X, (int)point.Y);
-            var matrix = GetMatrix(N_ball);
-            var N_normalMap = MatrixTimesVector(matrix, Vector3.Normalize(2 * new Vector3(color.R, color.G, color.B) - Vector3.One));
-            //var N_normalMap = Rebase(new Vector3(color.R, color.G, color.B) - Vector3.One * 0x8f / 0x8f * new Vector3(1, -1, 1), Vector3.Normalize(N_ball));
+            // normal versor from normalMap
+            var color = parameters.NormalMap.GetPixel((int)point.X, (int)point.Y).From255();
+            var N_normalMap = Multiply(Vector3.Normalize(2 * color - Vector3.One), N_ball);
             var N = Vector3.Normalize(N_ball * parameters.K + N_normalMap * (1 - parameters.K));
             // additional versors
             var V = new Vector3(0, 0, 1);
@@ -27,8 +26,8 @@ namespace InfrastructureLayer.Services
             var L = Vector3.Normalize(sourceLocation - point);
             var R = 2 * Vector3.Dot(N, L) * N - L;
 
-            var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
-            var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
+            var actualColor1 = I_L * I_O * parameters.Kd * CosineBetweenVectors(N, L);
+            var actualColor2 = I_L * I_O * parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M);
             return (actualColor1 + actualColor2).To255();
         }
 
@@ -37,28 +36,11 @@ namespace InfrastructureLayer.Services
             return parameters.Texture.GetPixel((int)point.X, (int)point.Y);
         }
 
-        private static Vector3[] GetMatrix(Vector3 N_ball)
+        private static Vector3 Multiply(Vector3 v, Vector3 n)
         {
-            var B = (N_ball == new Vector3(0, 0, 1) ? new Vector3(0, 1, 0) : Vector3.Cross(N_ball, new Vector3(0, 0, 1)));
-            var T = Vector3.Cross(B, N_ball);
-            return new[] { T, B, N_ball };
-        }
-
-        private static Vector3 MatrixTimesVector(Vector3[] matrix, Vector3 vector)
-        {
-            var result = Vector3.Zero;
-            result.X = matrix[0].X * vector.X + matrix[1].X * vector.Y + matrix[2].X * vector.Z;
-            result.Z = matrix[0].Y * vector.X + matrix[1].Y * vector.Y + matrix[2].Y * vector.Z;
-            result.Z = matrix[0].Z * vector.X + matrix[1].Z * vector.Y + matrix[2].Z * vector.Z;
-            return result;
-        }
-
-        private static Vector3 Rebase(Vector3 v, Vector3 n)
-        {
-            Vector3 roty = (n.Z == 1) ? new Vector3(0, 1, 0) : Vector3.Normalize(n * new Vector3(0, 0, 1));
-            Vector3 rotx = Vector3.Normalize(roty * n);
-            Vector3 rotz = n;
-            return Vector3.Normalize(rotx * v.X + roty * v.Y + rotz * v.Z);
+            var B = (n.Z == 1) ? new Vector3(0, 1, 0) : Vector3.Normalize(n * new Vector3(0, 0, 1));
+            var T = Vector3.Normalize(Vector3.Cross(B, n));
+            return Vector3.Normalize(T * v.X + B * v.Y + n * v.Z);
         }
 
         private static float CosineBetweenVectors(Vector3 vec1, Vector3 vec2)

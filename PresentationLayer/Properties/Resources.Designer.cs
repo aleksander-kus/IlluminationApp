@@ -73,6 +73,26 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap normal_mapping_normal_map {
+            get {
+                object obj = ResourceManager.GetObject("normal_mapping_normal_map", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap normal2 {
+            get {
+                object obj = ResourceManager.GetObject("normal2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pebbles_normalmap {
             get {
                 object obj = ResourceManager.GetObject("pebbles_normalmap", resourceCulture);
