@@ -156,13 +156,13 @@ namespace PresentationLayer
             isMouseDown = false;
         }
 
-        private void accurateButton_CheckedChanged(object sender, EventArgs e)
+        private void accurateButton_Click(object sender, EventArgs e)
         {
             presenter.Parameters.FillMode = DomainLayer.FillMode.Accurate;
             interpolationButton.Checked = false;
         }
 
-        private void interpolationButton_CheckedChanged(object sender, EventArgs e)
+        private void interpolationButton_Click(object sender, EventArgs e)
         {
             presenter.Parameters.FillMode = DomainLayer.FillMode.Interpolation;
             accurateButton.Checked = false;

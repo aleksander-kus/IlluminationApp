@@ -66,8 +66,8 @@ namespace PresentationLayer
             this.startAnimationButton = new System.Windows.Forms.Button();
             this.zTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.accurateButton = new System.Windows.Forms.RadioButton();
             this.interpolationButton = new System.Windows.Forms.RadioButton();
+            this.accurateButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -520,18 +520,6 @@ namespace PresentationLayer
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Fill method";
             // 
-            // accurateButton
-            // 
-            this.accurateButton.AutoSize = true;
-            this.accurateButton.Location = new System.Drawing.Point(12, 22);
-            this.accurateButton.Name = "accurateButton";
-            this.accurateButton.Size = new System.Drawing.Size(72, 19);
-            this.accurateButton.TabIndex = 0;
-            this.accurateButton.TabStop = true;
-            this.accurateButton.Text = "Accurate";
-            this.accurateButton.UseVisualStyleBackColor = true;
-            this.accurateButton.CheckedChanged += new System.EventHandler(this.accurateButton_CheckedChanged);
-            // 
             // interpolationButton
             // 
             this.interpolationButton.AutoSize = true;
@@ -539,10 +527,22 @@ namespace PresentationLayer
             this.interpolationButton.Name = "interpolationButton";
             this.interpolationButton.Size = new System.Drawing.Size(93, 19);
             this.interpolationButton.TabIndex = 1;
-            this.interpolationButton.TabStop = true;
             this.interpolationButton.Text = "Interpolation";
             this.interpolationButton.UseVisualStyleBackColor = true;
-            this.interpolationButton.CheckedChanged += new System.EventHandler(this.interpolationButton_CheckedChanged);
+            this.interpolationButton.Click += new System.EventHandler(this.interpolationButton_Click);
+            // 
+            // accurateButton
+            // 
+            this.accurateButton.AutoSize = true;
+            this.accurateButton.Checked = true;
+            this.accurateButton.Location = new System.Drawing.Point(12, 22);
+            this.accurateButton.Name = "accurateButton";
+            this.accurateButton.Size = new System.Drawing.Size(72, 19);
+            this.accurateButton.TabIndex = 0;
+            this.accurateButton.TabStop = true;
+            this.accurateButton.Text = "Accurate";
+            this.accurateButton.UseVisualStyleBackColor = true;
+            this.accurateButton.Click += new System.EventHandler(this.accurateButton_Click);
             // 
             // FillWindow
             // 

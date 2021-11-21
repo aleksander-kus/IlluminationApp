@@ -49,7 +49,10 @@ namespace InfrastructureLayer.Services
             int ymin = (int)P[0].Y;
             int ymax = (int)P[^1].Y;
             int current_index = 0;
-            for(int y = ymin; y <= ymax; ++y)
+            Vector3 color1 = colorService.ComputeColor(shape[0], parameters).From255();
+            Vector3 color2 = colorService.ComputeColor(shape[1], parameters).From255();
+            Vector3 color3 = colorService.ComputeColor(shape[2], parameters).From255();
+            for (int y = ymin; y <= ymax; ++y)
             {
                 // For each point that was on the previous line
                 while (P[current_index].Y == y - 1)
@@ -87,7 +90,14 @@ namespace InfrastructureLayer.Services
                 {
                     for (int x = (int)Math.Round(AET[i].x); x < AET[i + 1].x; ++x)
                     {
-                        var color = colorService.ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                        Color color = Color.Black;
+                        if(parameters.FillMode == FillMode.Interpolation)
+                        {
+                            var factors = GetInterpolationFactors(shape, new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                            color = (color1 * factors.X + color2 * factors.Y + color3 * factors.Z).To255();
+                        }
+                        else
+                            color = colorService.ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
                         bitmap.SetPixel(x, y, color);
                     }
                 }
@@ -98,6 +108,18 @@ namespace InfrastructureLayer.Services
                     AET[i] = (y_max, x + 1 / m, m);
                 }
             }
+        }
+
+        private static Vector3 GetInterpolationFactors(List<Vector3> shape, Vector3 point, IlluminationParameters parameters)
+        {
+            var f1 = shape[0] - point;
+            var f2 = shape[1] - point;
+            var f3 = shape[2] - point;
+            var TriangleArea = Vector3.Cross(shape[0] - shape[1], shape[0] - shape[2]).Length();
+            var a1 = Vector3.Cross(f2, f3).Length() / TriangleArea;
+            var a2 = Vector3.Cross(f3, f1).Length() / TriangleArea;
+            var a3 = Vector3.Cross(f1, f2).Length() / TriangleArea;
+            return new Vector3(a1, a2, a3);
         }
 
         /// <summary>
