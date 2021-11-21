@@ -155,5 +155,17 @@ namespace PresentationLayer
             presenter.RegisterMouseUp();
             isMouseDown = false;
         }
+
+        private void accurateButton_CheckedChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.FillMode = DomainLayer.FillMode.Accurate;
+            interpolationButton.Checked = false;
+        }
+
+        private void interpolationButton_CheckedChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.FillMode = DomainLayer.FillMode.Interpolation;
+            accurateButton.Checked = false;
+        }
     }
 }

@@ -65,6 +65,9 @@ namespace PresentationLayer
             this.stopAnimationButton = new System.Windows.Forms.Button();
             this.startAnimationButton = new System.Windows.Forms.Button();
             this.zTrackbar = new System.Windows.Forms.TrackBar();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.accurateButton = new System.Windows.Forms.RadioButton();
+            this.interpolationButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -88,6 +91,7 @@ namespace PresentationLayer
             this.groupBox5.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -126,10 +130,12 @@ namespace PresentationLayer
             this.menuTable.Controls.Add(this.groupBox2, 0, 1);
             this.menuTable.Controls.Add(this.groupBox3, 0, 2);
             this.menuTable.Controls.Add(this.groupBox5, 0, 3);
+            this.menuTable.Controls.Add(this.groupBox6, 0, 4);
             this.menuTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuTable.Location = new System.Drawing.Point(824, 3);
             this.menuTable.Name = "menuTable";
-            this.menuTable.RowCount = 4;
+            this.menuTable.RowCount = 5;
+            this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -502,6 +508,42 @@ namespace PresentationLayer
             this.zTrackbar.Value = 100;
             this.zTrackbar.ValueChanged += new System.EventHandler(this.zTrackbar_ValueChanged);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.interpolationButton);
+            this.groupBox6.Controls.Add(this.accurateButton);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 579);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(341, 100);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Fill method";
+            // 
+            // accurateButton
+            // 
+            this.accurateButton.AutoSize = true;
+            this.accurateButton.Location = new System.Drawing.Point(12, 22);
+            this.accurateButton.Name = "accurateButton";
+            this.accurateButton.Size = new System.Drawing.Size(72, 19);
+            this.accurateButton.TabIndex = 0;
+            this.accurateButton.TabStop = true;
+            this.accurateButton.Text = "Accurate";
+            this.accurateButton.UseVisualStyleBackColor = true;
+            this.accurateButton.CheckedChanged += new System.EventHandler(this.accurateButton_CheckedChanged);
+            // 
+            // interpolationButton
+            // 
+            this.interpolationButton.AutoSize = true;
+            this.interpolationButton.Location = new System.Drawing.Point(12, 63);
+            this.interpolationButton.Name = "interpolationButton";
+            this.interpolationButton.Size = new System.Drawing.Size(93, 19);
+            this.interpolationButton.TabIndex = 1;
+            this.interpolationButton.TabStop = true;
+            this.interpolationButton.Text = "Interpolation";
+            this.interpolationButton.UseVisualStyleBackColor = true;
+            this.interpolationButton.CheckedChanged += new System.EventHandler(this.interpolationButton_CheckedChanged);
+            // 
             // FillWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -542,6 +584,8 @@ namespace PresentationLayer
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -584,5 +628,8 @@ namespace PresentationLayer
         private System.Windows.Forms.Button resetAnimationButton;
         private System.Windows.Forms.Label kLabel;
         private System.Windows.Forms.TrackBar kTrackbar;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton interpolationButton;
+        private System.Windows.Forms.RadioButton accurateButton;
     }
 }

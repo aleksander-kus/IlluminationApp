@@ -97,6 +97,20 @@ namespace DomainLayer
             }
         }
 
+        private FillMode fillMode = FillMode.Accurate;
+        public FillMode FillMode
+        {
+            get => fillMode;
+            set
+            {
+                if (fillMode != value)
+                {
+                    fillMode = value;
+                    OnPropertyChanged(nameof(FillMode));
+                }
+            }
+        }
+
         private Point lightSourcePosition = new Point(417, 417);
         public Point LightSourcePosition
         {

@@ -54,7 +54,6 @@ namespace PresentationLayer
             animationService = new AnimationService(AnimationInterval, AnimationTime, Parameters);
             LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\Basketball.png");
             Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
-            //LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg");
         }
 
         private static int SquaredDistance(Point p1, Point p2) => (p2.X - p1.X) * (p2.X - p1.X) + (p2.Y - p1.Y) * (p2.Y - p1.Y);

@@ -12,7 +12,7 @@ namespace InfrastructureLayer.Services
             if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
                 return parameters.SceneColor;
             // the base color of point
-            var I_O = parameters.ColoringMode == ColoringMode.SolidColor ? parameters.SceneColor.From255() : 
+            var I_O = parameters.ColoringMode == ColoringMode.SolidColor ? parameters.SceneColor.From255() :
                 GetColorFromTexture(point, parameters).From255();
             // light color
             var I_L = parameters.LightColor.From255();
@@ -31,12 +31,10 @@ namespace InfrastructureLayer.Services
 
             var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
             var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
-            if (actualColor1.X + actualColor2.X < 0)
-                return parameters.SceneColor;
             return (actualColor1 + actualColor2).To255();
         }
 
-        private Color GetColorFromTexture(Vector3 point, IlluminationParameters parameters)
+        private static Color GetColorFromTexture(Vector3 point, IlluminationParameters parameters)
         {
             return parameters.Texture.GetPixel((int)point.X, (int)point.Y);
         }

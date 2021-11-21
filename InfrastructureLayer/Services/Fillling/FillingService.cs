@@ -100,12 +100,15 @@ namespace InfrastructureLayer.Services
             }
         }
 
-        public static float CalculateZ(int x, int y, Vector3 P1, Vector3 P2, Vector3 P3)
+        /// <summary>
+        /// Calculate the third coordinate of a point, given three points of the plane it is on
+        /// </summary>
+        public static float CalculateZ(int x, int y, Vector3 p1, Vector3 p2, Vector3 p3)
         {
-            float z = (P3.Z * (x - P1.X) * (y - P2.Y) + P1.Z * (x - P2.X) * (y - P3.Y) + P2.Z * (x - P3.X) * (y - P1.Y) - P2.Z * (x - P1.X) * (y - P3.Y) - P3.Z * (x - P2.X) * (y - P1.Y) - P1.Z * (x - P3.X) * (y - P2.Y))
-                    / ((x - P1.X) * (y - P2.Y) + (x - P2.X) * (y - P3.Y) + (x - P3.X) * (y - P1.Y) - (x - P1.X) * (y - P3.Y) - (x - P2.X) * (y - P1.Y) - (x - P3.X) * (y - P2.Y));
+            float z1 = p3.Z * (x - p1.X) * (y - p2.Y) + p1.Z * (x - p2.X) * (y - p3.Y) + p2.Z * (x - p3.X) * (y - p1.Y) - p2.Z * (x - p1.X) * (y - p3.Y) - p3.Z * (x - p2.X) * (y - p1.Y) - p1.Z * (x - p3.X) * (y - p2.Y);
+            float z2 = (x - p1.X) * (y - p2.Y) + (x - p2.X) * (y - p3.Y) + (x - p3.X) * (y - p1.Y) - (x - p1.X) * (y - p3.Y) - (x - p2.X) * (y - p1.Y) - (x - p3.X) * (y - p2.Y);
 
-            return z;
+            return z1/z2;
         }
     }
 }
