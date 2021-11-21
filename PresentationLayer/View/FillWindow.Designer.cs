@@ -50,8 +50,8 @@ namespace PresentationLayer
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.sceneColorPreview = new System.Windows.Forms.PictureBox();
             this.sceneColorButton = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.textureRadioButton = new System.Windows.Forms.RadioButton();
+            this.solidColorRadioButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lightColorPreview = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -146,6 +146,7 @@ namespace PresentationLayer
             this.triangulationBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.triangulationBar.Location = new System.Drawing.Point(3, 19);
             this.triangulationBar.Maximum = 15;
+            this.triangulationBar.Minimum = 4;
             this.triangulationBar.Name = "triangulationBar";
             this.triangulationBar.Size = new System.Drawing.Size(335, 51);
             this.triangulationBar.TabIndex = 0;
@@ -305,8 +306,8 @@ namespace PresentationLayer
             // 
             this.groupBox4.Controls.Add(this.sceneColorPreview);
             this.groupBox4.Controls.Add(this.sceneColorButton);
-            this.groupBox4.Controls.Add(this.radioButton2);
-            this.groupBox4.Controls.Add(this.radioButton1);
+            this.groupBox4.Controls.Add(this.textureRadioButton);
+            this.groupBox4.Controls.Add(this.solidColorRadioButton);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 32);
             this.groupBox4.Name = "groupBox4";
@@ -334,27 +335,29 @@ namespace PresentationLayer
             this.sceneColorButton.UseVisualStyleBackColor = true;
             this.sceneColorButton.Click += new System.EventHandler(this.sceneColorButton_Click);
             // 
-            // radioButton2
+            // textureRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 64);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(63, 19);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Texture";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.textureRadioButton.AutoSize = true;
+            this.textureRadioButton.Location = new System.Drawing.Point(6, 64);
+            this.textureRadioButton.Name = "textureRadioButton";
+            this.textureRadioButton.Size = new System.Drawing.Size(63, 19);
+            this.textureRadioButton.TabIndex = 1;
+            this.textureRadioButton.Text = "Texture";
+            this.textureRadioButton.UseVisualStyleBackColor = true;
+            this.textureRadioButton.Click += new System.EventHandler(this.textureRadioButton_Click);
             // 
-            // radioButton1
+            // solidColorRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 22);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(81, 19);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Solid color";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.solidColorRadioButton.AutoSize = true;
+            this.solidColorRadioButton.Checked = true;
+            this.solidColorRadioButton.Location = new System.Drawing.Point(6, 22);
+            this.solidColorRadioButton.Name = "solidColorRadioButton";
+            this.solidColorRadioButton.Size = new System.Drawing.Size(81, 19);
+            this.solidColorRadioButton.TabIndex = 0;
+            this.solidColorRadioButton.TabStop = true;
+            this.solidColorRadioButton.Text = "Solid color";
+            this.solidColorRadioButton.UseVisualStyleBackColor = true;
+            this.solidColorRadioButton.Click += new System.EventHandler(this.solidColorRadioButton_Click);
             // 
             // panel1
             // 
@@ -514,8 +517,8 @@ namespace PresentationLayer
         private System.Windows.Forms.TableLayoutPanel colorTable;
         private System.Windows.Forms.Button changeLightButton;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton textureRadioButton;
+        private System.Windows.Forms.RadioButton solidColorRadioButton;
         private System.Windows.Forms.Button sceneColorButton;
         private System.Windows.Forms.PictureBox sceneColorPreview;
         private System.Windows.Forms.Panel panel1;

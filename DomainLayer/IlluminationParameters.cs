@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,6 +69,32 @@ namespace DomainLayer
                 OnPropertyChanged(nameof(LightColor));
             }
         }
+
+        private ColoringMode coloringMode = ColoringMode.SolidColor;
+        public ColoringMode ColoringMode
+        {
+            get => coloringMode;
+            set
+            {
+                if(coloringMode != value)
+                {
+                    coloringMode = value;
+                    OnPropertyChanged(nameof(ColoringMode));
+                }
+            }
+        }
+
+        private Point lightSourcePosition = new Point(417, 417);
+        public Point LightSourcePosition
+        {
+            get => lightSourcePosition;
+            set
+            {
+                lightSourcePosition = value;
+                OnPropertyChanged(nameof(LightSourcePosition));
+            }
+        }
+
         public int Radius { get; set; }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)

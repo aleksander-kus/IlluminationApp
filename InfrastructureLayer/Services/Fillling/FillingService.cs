@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace InfrastructureLayer.Services
 {
-    public class ColoringService : IColoringService
+    public class FillingService : IFillingService
     {
+        private IColorService colorService;
+
+        public FillingService(IColorService colorService)
+        {
+            this.colorService = colorService;
+        }
+
         public void DrawSphereEdges(Bitmap bitmap, List<List<Vector3>> sphere)
         {
             using Graphics graphics = Graphics.FromImage(bitmap);
@@ -76,11 +83,13 @@ namespace InfrastructureLayer.Services
                 AET.Sort((item1, item2) => item1.x.CompareTo(item2.x));
                 // Fill pixels between every pair of edges
                 for(int i = 0; i < AET.Count; i += 2)
+                {
                     for (int x = (int)Math.Round(AET[i].x); x < AET[i + 1].x; ++x)
                     {
-                        var color = ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                        var color = colorService.ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
                         bitmap.SetPixel(x, y, color);
                     }
+                }
                 // Update the x value for each edge
                 for(int i = 0; i < AET.Count; ++i)
                 {
@@ -88,29 +97,6 @@ namespace InfrastructureLayer.Services
                     AET[i] = (y_max, x + 1 / m, m);
                 }
             }
-        }
-        private Color ComputeColor(Vector3 point, IlluminationParameters parameters)
-        {
-            if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
-                return parameters.SceneColor;
-            var I_O = parameters.SceneColor.From255();  // the base color of point
-            var I_L = parameters.LightColor.From255();  // light color
-            var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
-            var V = new Vector3(0, 0, 1);
-            var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius + parameters.Z);
-
-            var L = Vector3.Normalize(sourceLocation - point);
-            var R = 2 * Vector3.Dot(N, L) * N - L;
-
-            var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
-            var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
-            return (actualColor1 + actualColor2).To255();
-        }
-
-        private static float CosineBetweenVectors(Vector3 vec1, Vector3 vec2)
-        {
-            var ret = vec1.X * vec2.X + vec1.Y * vec2.Y + vec1.Z * vec2.Z;
-            return Math.Max(ret, 0);
         }
 
         public static float CalculateZ(int x, int y, Vector3 P1, Vector3 P2, Vector3 P3)

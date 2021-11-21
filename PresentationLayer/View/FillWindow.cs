@@ -6,6 +6,7 @@ namespace PresentationLayer
 {
     public partial class FillWindow : Form, IFillView
     {
+        public Timer Timer { get; set; } = new();
         private FillPresenter presenter;
         public FillWindow()
         {
@@ -101,5 +102,16 @@ namespace PresentationLayer
             e.Graphics.FillRectangle(brush, 0, 0, lightColorPreview.Width, lightColorPreview.Height);
         }
 
+        private void solidColorRadioButton_Click(object sender, EventArgs e)
+        {
+            textureRadioButton.Checked = false;
+            presenter.Parameters.ColoringMode = DomainLayer.ColoringMode.SolidColor;
+        }
+
+        private void textureRadioButton_Click(object sender, EventArgs e)
+        {
+            solidColorRadioButton.Checked = false;
+            presenter.Parameters.ColoringMode = DomainLayer.ColoringMode.Texture;
+        }
     }
 }
