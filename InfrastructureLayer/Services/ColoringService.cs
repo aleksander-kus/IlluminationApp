@@ -25,15 +25,10 @@ namespace InfrastructureLayer.Services
         {
             // Lock the bitmap's bits.  
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-
-            // Get the address of the first line.
-            IntPtr ptr = bitmapData.Scan0;
-
-            // Declare an array to hold the bytes of the bitmap.
             ByteBitmap byteBitmap = new(bitmap.Width, bitmap.Height, bitmapData.Stride / bitmap.Width);
             Parallel.ForEach(shapes, shape => ScanLineColoring(byteBitmap, shape, parameters));
             // Copy the RGB values back to the bitmap
-            System.Runtime.InteropServices.Marshal.Copy(byteBitmap.Bitmap, 0, ptr, byteBitmap.Bitmap.Length);
+            System.Runtime.InteropServices.Marshal.Copy(byteBitmap.Bitmap, 0, bitmapData.Scan0, byteBitmap.Bitmap.Length);
 
             // Unlock the bits.
             bitmap.UnlockBits(bitmapData);
@@ -81,10 +76,10 @@ namespace InfrastructureLayer.Services
                 AET.Sort((item1, item2) => item1.x.CompareTo(item2.x));
                 // Fill pixels between every pair of edges
                 for(int i = 0; i < AET.Count; i += 2)
-                    for (int j = (int)Math.Round(AET[i].x); j < AET[i + 1].x; ++j)
+                    for (int x = (int)Math.Round(AET[i].x); x < AET[i + 1].x; ++x)
                     {
-                        var color = ComputeColor(new Vector3(j, y, CalculateZ(j, y, shape[0], shape[1], shape[2])), parameters);
-                        bitmap.SetPixel(j, y, color);
+                        var color = ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                        bitmap.SetPixel(x, y, color);
                     }
                 // Update the x value for each edge
                 for(int i = 0; i < AET.Count; ++i)
@@ -102,18 +97,17 @@ namespace InfrastructureLayer.Services
             var I_L = parameters.LightColor.From255();  // light color
             var N = Vector3.Normalize(point - new Vector3(parameters.Radius, parameters.Radius, 0));  // normal versor
             var V = new Vector3(0, 0, 1);
-            var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius * 2);
+            var sourceLocation = new Vector3(parameters.Radius, parameters.Radius, parameters.Radius + parameters.Z);
 
             var L = Vector3.Normalize(sourceLocation - point);
             var R = 2 * Vector3.Dot(N, L) * N - L;
 
             var actualColor1 = Vector3.Multiply(I_L * I_O, parameters.Kd * CosineBetweenVectors(N, L));
             var actualColor2 = Vector3.Multiply(I_L * I_O, parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.M));
-            var r = (actualColor1 + actualColor2).To255();
-            return r;
+            return (actualColor1 + actualColor2).To255();
         }
 
-        private float CosineBetweenVectors(Vector3 vec1, Vector3 vec2)
+        private static float CosineBetweenVectors(Vector3 vec1, Vector3 vec2)
         {
             var ret = vec1.X * vec2.X + vec1.Y * vec2.Y + vec1.Z * vec2.Z;
             return Math.Max(ret, 0);

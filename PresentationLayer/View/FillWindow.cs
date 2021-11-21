@@ -34,6 +34,7 @@ namespace PresentationLayer
             kdLabel.Text = $"kd: {kdTrackbar.Value / 100.0f:0.00}";
             ksLabel.Text = $"ks: {ksTrackbar.Value / 100.0f:0.00}";
             mLabel.Text = $"m: {mTrackbar.Value}";
+            zLabel.Text = $"Source height (z): {zTrackbar.Value}";
         }
 
         private void kdTrackbar_ValueChanged(object sender, EventArgs e)
@@ -52,6 +53,11 @@ namespace PresentationLayer
         {
             presenter.Parameters.M = mTrackbar.Value;
             mLabel.Text = $"m: {mTrackbar.Value}";
+        }
+        private void zTrackbar_ValueChanged(object sender, EventArgs e)
+        {
+            presenter.Parameters.Z = zTrackbar.Value;
+            zLabel.Text = $"Source height (z): {zTrackbar.Value}";
         }
 
         private void triangulationBar_ValueChanged(object sender, EventArgs e)
@@ -94,5 +100,6 @@ namespace PresentationLayer
             using Brush brush = new SolidBrush(presenter.Parameters.LightColor);
             e.Graphics.FillRectangle(brush, 0, 0, lightColorPreview.Width, lightColorPreview.Height);
         }
+
     }
 }

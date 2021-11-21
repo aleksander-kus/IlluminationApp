@@ -10,17 +10,7 @@ namespace InfrastructureLayer.Services
 {
     public class TriangulationService : ITriangulationService
     {
-        public void DrawTriangulatedSphere(Bitmap bitmap, List<List<Vector3>> sphere)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<List<Point>> TriangulateSphere(int radius, int centerX, int centerY, int quantity)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<List<Vector3>> ITriangulationService.TriangulateSphere(int radius, int centerX, int centerY, int quantity)
+        public List<List<Vector3>> TriangulateSphere(int radius, int centerX, int centerY, int quantity)
         {
             throw new NotImplementedException();
         }

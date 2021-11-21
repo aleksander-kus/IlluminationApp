@@ -56,6 +56,12 @@ namespace PresentationLayer
             this.lightColorPreview = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.changeLightButton = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.zLabel = new System.Windows.Forms.Label();
+            this.stopAnimationButton = new System.Windows.Forms.Button();
+            this.startAnimationButton = new System.Windows.Forms.Button();
+            this.zTrackbar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -75,6 +81,9 @@ namespace PresentationLayer
             ((System.ComponentModel.ISupportInitialize)(this.sceneColorPreview)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -109,10 +118,12 @@ namespace PresentationLayer
             this.menuTable.Controls.Add(this.groupBox1, 0, 0);
             this.menuTable.Controls.Add(this.groupBox2, 0, 1);
             this.menuTable.Controls.Add(this.groupBox3, 0, 2);
+            this.menuTable.Controls.Add(this.groupBox5, 0, 3);
             this.menuTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuTable.Location = new System.Drawing.Point(824, 3);
             this.menuTable.Name = "menuTable";
-            this.menuTable.RowCount = 3;
+            this.menuTable.RowCount = 4;
+            this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -196,6 +207,7 @@ namespace PresentationLayer
             this.kdTrackbar.Name = "kdTrackbar";
             this.kdTrackbar.Size = new System.Drawing.Size(329, 49);
             this.kdTrackbar.TabIndex = 1;
+            this.kdTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.kdTrackbar.Value = 50;
             this.kdTrackbar.ValueChanged += new System.EventHandler(this.kdTrackbar_ValueChanged);
             // 
@@ -226,6 +238,7 @@ namespace PresentationLayer
             this.ksTrackbar.Name = "ksTrackbar";
             this.ksTrackbar.Size = new System.Drawing.Size(329, 49);
             this.ksTrackbar.TabIndex = 2;
+            this.ksTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.ksTrackbar.Value = 50;
             this.ksTrackbar.ValueChanged += new System.EventHandler(this.ksTrackbar_ValueChanged);
             // 
@@ -257,6 +270,7 @@ namespace PresentationLayer
             this.mTrackbar.Name = "mTrackbar";
             this.mTrackbar.Size = new System.Drawing.Size(329, 51);
             this.mTrackbar.TabIndex = 3;
+            this.mTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.mTrackbar.Value = 50;
             this.mTrackbar.ValueChanged += new System.EventHandler(this.mTrackbar_ValueChanged);
             // 
@@ -382,6 +396,68 @@ namespace PresentationLayer
             this.changeLightButton.UseVisualStyleBackColor = true;
             this.changeLightButton.Click += new System.EventHandler(this.changeLightButton_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.panel5);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 454);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(341, 100);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Light source animation";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.zLabel);
+            this.panel5.Controls.Add(this.stopAnimationButton);
+            this.panel5.Controls.Add(this.startAnimationButton);
+            this.panel5.Controls.Add(this.zTrackbar);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(3, 19);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(335, 78);
+            this.panel5.TabIndex = 0;
+            // 
+            // zLabel
+            // 
+            this.zLabel.AutoSize = true;
+            this.zLabel.Location = new System.Drawing.Point(104, 26);
+            this.zLabel.Name = "zLabel";
+            this.zLabel.Size = new System.Drawing.Size(99, 15);
+            this.zLabel.TabIndex = 3;
+            this.zLabel.Text = "Source height (z):";
+            // 
+            // stopAnimationButton
+            // 
+            this.stopAnimationButton.Location = new System.Drawing.Point(207, 51);
+            this.stopAnimationButton.Name = "stopAnimationButton";
+            this.stopAnimationButton.Size = new System.Drawing.Size(103, 23);
+            this.stopAnimationButton.TabIndex = 2;
+            this.stopAnimationButton.Text = "Stop animation";
+            this.stopAnimationButton.UseVisualStyleBackColor = true;
+            // 
+            // startAnimationButton
+            // 
+            this.startAnimationButton.Location = new System.Drawing.Point(27, 51);
+            this.startAnimationButton.Name = "startAnimationButton";
+            this.startAnimationButton.Size = new System.Drawing.Size(103, 23);
+            this.startAnimationButton.TabIndex = 1;
+            this.startAnimationButton.Text = "Start animation";
+            this.startAnimationButton.UseVisualStyleBackColor = true;
+            // 
+            // zTrackbar
+            // 
+            this.zTrackbar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.zTrackbar.Location = new System.Drawing.Point(0, 0);
+            this.zTrackbar.Maximum = 400;
+            this.zTrackbar.Name = "zTrackbar";
+            this.zTrackbar.Size = new System.Drawing.Size(335, 45);
+            this.zTrackbar.TabIndex = 0;
+            this.zTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.zTrackbar.Value = 100;
+            this.zTrackbar.ValueChanged += new System.EventHandler(this.zTrackbar_ValueChanged);
+            // 
             // FillWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -417,6 +493,10 @@ namespace PresentationLayer
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorPreview)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -450,5 +530,11 @@ namespace PresentationLayer
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label mLabel;
         private System.Windows.Forms.TrackBar mTrackbar;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TrackBar zTrackbar;
+        private System.Windows.Forms.Label zLabel;
+        private System.Windows.Forms.Button stopAnimationButton;
+        private System.Windows.Forms.Button startAnimationButton;
     }
 }

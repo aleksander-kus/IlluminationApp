@@ -39,6 +39,17 @@ namespace DomainLayer
                 OnPropertyChanged(nameof(M));
             }
         }
+
+        private int z = 100;
+        public int Z
+        {
+            get => z;
+            set
+            {
+                z = value;
+                OnPropertyChanged(nameof(Z));
+            }
+        }
         private Color sceneColor;
         public Color SceneColor { get => sceneColor;
             set
