@@ -12,7 +12,9 @@ namespace PresentationLayer
         public FillWindow()
         {
             InitializeComponent();
+            // Texture source https://spojniastargard.com/wp-content/uploads/2015/08/Basketball.png
             Texture = Properties.Resources.Basketball;
+            // NormalMap source https://nomeradona.files.wordpress.com/2009/05/pebbles_normalmap.jpg
             NormalMap = Properties.Resources.pebbles_normalmap;
         }
 

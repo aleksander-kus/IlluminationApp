@@ -106,6 +106,8 @@ namespace PresentationLayer
             view.CanvasImage = new Bitmap(bitmap);
             coloringService.FillTriangles(bitmap, triangulatedSphere, Parameters);
             coloringService.DrawSphereEdges(bitmap, triangulatedSphere);
+            Graphics g = Graphics.FromImage(bitmap);
+            g.FillEllipse(Brushes.Yellow, Parameters.LightSourcePosition.X - 3, Parameters.LightSourcePosition.Y - 3, 6, 6);
             view.CanvasImage = bitmap;
             view.Redraw();
         }

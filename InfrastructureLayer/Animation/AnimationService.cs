@@ -19,7 +19,7 @@ namespace InfrastructureLayer
         public AnimationService(int interval, int time, IlluminationParameters parameters)
         {
             this.parameters = parameters;
-            iNumPoints = time / interval / 10;
+            iNumPoints = time / interval / 5;
             points = new Point[iNumPoints];
             GeneratePointsOnSpiral();
         }
@@ -39,7 +39,7 @@ namespace InfrastructureLayer
 
         private void GeneratePointsOnSpiral()
         {
-            const int iNumRevs = 4;
+            const int iNumRevs = 10;
             
             float fAngle, fScale;
 
