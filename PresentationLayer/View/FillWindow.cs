@@ -12,6 +12,8 @@ namespace PresentationLayer
         public FillWindow()
         {
             InitializeComponent();
+            Texture = Properties.Resources.Basketball;
+            NormalMap = Properties.Resources.pebbles_normalmap;
         }
 
         public FillPresenter Presenter { set => presenter = value; }
@@ -21,6 +23,8 @@ namespace PresentationLayer
         public int CanvasSizeY => pictureBox1.Height;
 
         public Bitmap CanvasImage { set => pictureBox1.Image = value; }
+        public Image Texture { get; set; }
+        public Image NormalMap { get; set; }
 
         public void Redraw()
         {

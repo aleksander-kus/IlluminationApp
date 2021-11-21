@@ -37,7 +37,7 @@ namespace PresentationLayer
             this.view.CanvasImage = bitmap;
             this.view.Timer.Interval = AnimationInterval;
             this.view.Timer.Tick += Timer_Tick;
-            
+
             Parameters = new()
             {
                 Radius = view.CanvasSizeX / 2,
@@ -45,15 +45,15 @@ namespace PresentationLayer
                 CanvasY = view.CanvasSizeY,
                 SceneColor = Color.Green,
                 LightColor = Color.White,
-                LightSourcePosition = new Point(view.CanvasSizeX / 2, view.CanvasSizeY / 2)
+                LightSourcePosition = new Point(view.CanvasSizeX / 2, view.CanvasSizeY / 2),
+                Texture = new ByteBitmap(new Bitmap(this.view.Texture)),
+                NormalMap = new ByteBitmap(new Bitmap(this.view.NormalMap))
             };
             Parameters.Radius = view.CanvasSizeX / 2;
             Parameters.PropertyChanged += Parameters_PropertyChanged;
             triangulationService = new TriService();
             coloringService = new FillingService(new ColorService());
             animationService = new AnimationService(AnimationInterval, AnimationTime, Parameters);
-            LoadTexture("C:\\Users\\alexq\\studia\\gk1\\lab2\\Basketball.png");
-            Parameters.NormalMap = new ByteBitmap((Bitmap)Image.FromFile("C:\\Users\\alexq\\studia\\gk1\\lab2\\pebbles_normalmap.jpg"));
         }
 
         private static int SquaredDistance(Point p1, Point p2) => (p2.X - p1.X) * (p2.X - p1.X) + (p2.Y - p1.Y) * (p2.Y - p1.Y);
@@ -90,12 +90,6 @@ namespace PresentationLayer
             animationService.ResetAnimation();
             ColorBitmap();
         }
-
-        private void LoadTexture(string path)
-        {
-            Parameters.Texture = new ByteBitmap((Bitmap)Image.FromFile(path));
-        }
-
         private void Timer_Tick(object sender, System.EventArgs e)
         {
             animationService.AnimateFrame();
