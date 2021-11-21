@@ -10,8 +10,6 @@ namespace InfrastructureLayer.Services
     {
         public Color ComputeColor(Vector3 point, IlluminationParameters parameters)
         {
-            //if (point == new Vector3(parameters.Radius, parameters.Radius, parameters.Radius))
-            //    return parameters.ColoringMode == ColoringMode.SolidColor ? parameters.SceneColor : GetColorFromTexture(point, parameters);
             // the base color of point
             var I_O = parameters.ColoringMode == ColoringMode.SolidColor ? parameters.SceneColor.From255() : GetColorFromTexture(point, parameters).From255();
             // light color
@@ -38,8 +36,6 @@ namespace InfrastructureLayer.Services
         {
             return parameters.Texture.GetPixel((int)point.X, (int)point.Y);
         }
-
-
 
         private static Vector3 Rebase(Vector3 v, Vector3 n)
         {
