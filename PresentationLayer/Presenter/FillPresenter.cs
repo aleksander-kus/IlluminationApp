@@ -3,7 +3,6 @@ using InfrastructureLayer;
 using InfrastructureLayer.Services;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Numerics;
 
 namespace PresentationLayer

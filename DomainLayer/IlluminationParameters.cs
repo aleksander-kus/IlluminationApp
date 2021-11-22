@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainLayer
 {
@@ -51,7 +45,7 @@ namespace DomainLayer
             }
         }
 
-        private int z = 100;
+        private int z = 400;
         public int Z
         {
             get => z;

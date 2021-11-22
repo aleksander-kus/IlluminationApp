@@ -505,7 +505,7 @@ namespace PresentationLayer
             this.zTrackbar.Size = new System.Drawing.Size(335, 45);
             this.zTrackbar.TabIndex = 0;
             this.zTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.zTrackbar.Value = 100;
+            this.zTrackbar.Value = 400;
             this.zTrackbar.ValueChanged += new System.EventHandler(this.zTrackbar_ValueChanged);
             // 
             // groupBox6
