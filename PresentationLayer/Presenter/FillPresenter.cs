@@ -50,7 +50,7 @@ namespace PresentationLayer
             };
             Parameters.Radius = view.CanvasSizeX / 2;
             Parameters.PropertyChanged += Parameters_PropertyChanged;
-            triangulationService = new TriService();
+            triangulationService = new TriangulationService();
             coloringService = new FillingService(new ColorService());
             animationService = new AnimationService(AnimationInterval, AnimationTime, Parameters);
         }
