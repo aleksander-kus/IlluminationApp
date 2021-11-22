@@ -76,6 +76,7 @@ namespace PresentationLayer
             this.HTrackbar = new System.Windows.Forms.TrackBar();
             this.reflectorsButton = new System.Windows.Forms.RadioButton();
             this.normalButton = new System.Windows.Forms.RadioButton();
+            this.loadTextureButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -331,6 +332,7 @@ namespace PresentationLayer
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.loadTextureButton);
             this.groupBox4.Controls.Add(this.kLabel);
             this.groupBox4.Controls.Add(this.kTrackbar);
             this.groupBox4.Controls.Add(this.sceneColorPreview);
@@ -649,6 +651,16 @@ namespace PresentationLayer
             this.normalButton.UseVisualStyleBackColor = true;
             this.normalButton.Click += new System.EventHandler(this.normalButton_Click);
             // 
+            // loadTextureButton
+            // 
+            this.loadTextureButton.Location = new System.Drawing.Point(93, 62);
+            this.loadTextureButton.Name = "loadTextureButton";
+            this.loadTextureButton.Size = new System.Drawing.Size(114, 23);
+            this.loadTextureButton.TabIndex = 6;
+            this.loadTextureButton.Text = "Load texture";
+            this.loadTextureButton.UseVisualStyleBackColor = true;
+            this.loadTextureButton.Click += new System.EventHandler(this.loadTextureButton_Click);
+            // 
             // FillWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -749,5 +761,6 @@ namespace PresentationLayer
         private System.Windows.Forms.TrackBar HTrackbar;
         private System.Windows.Forms.Label mrLabel;
         private System.Windows.Forms.Label hLabel;
+        private System.Windows.Forms.Button loadTextureButton;
     }
 }

@@ -89,6 +89,20 @@ namespace PresentationLayer
             animationService.ResetAnimation();
             ColorBitmap();
         }
+
+        public bool LoadTexture(string path)
+        {
+            try
+            {
+                Parameters.Texture = new ByteBitmap(new Bitmap(Bitmap.FromFile(path)));
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            ColorBitmap();
+            return true;
+        }
         private void Timer_Tick(object sender, System.EventArgs e)
         {
             animationService.AnimateFrame();

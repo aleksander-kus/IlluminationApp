@@ -200,5 +200,15 @@ namespace PresentationLayer
             presenter.Parameters.LightMode = DomainLayer.LightMode.Reflectors;
             normalButton.Checked = false;
         }
+
+        private void loadTextureButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog od = new();
+            if(od.ShowDialog() == DialogResult.OK)
+            {
+                if (!presenter.LoadTexture(od.FileName))
+                    MessageBox.Show("Error loading texture");
+            }
+        }
     }
 }
