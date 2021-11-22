@@ -606,6 +606,7 @@ namespace PresentationLayer
             // 
             this.mrTrackbar.Location = new System.Drawing.Point(3, 96);
             this.mrTrackbar.Maximum = 20;
+            this.mrTrackbar.Minimum = 1;
             this.mrTrackbar.Name = "mrTrackbar";
             this.mrTrackbar.Size = new System.Drawing.Size(323, 45);
             this.mrTrackbar.TabIndex = 3;

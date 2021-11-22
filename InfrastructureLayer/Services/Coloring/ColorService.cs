@@ -34,9 +34,9 @@ namespace InfrastructureLayer.Services
             (Vector3 position, Color color) reflector1 = (new Vector3(0, parameters.CanvasY, parameters.Radius + parameters.H), Color.Red);
             (Vector3 position, Color color) reflector2 = (new Vector3(parameters.CanvasX, parameters.CanvasY, parameters.Radius + parameters.H), Color.Green);
             (Vector3 position, Color color) reflector3 = (new Vector3(parameters.CanvasX / 2, 0, parameters.Radius + parameters.H), Color.Blue);
-            //return CalculateColorFromLight(reflector1.position, reflector1.color, point, N, I_O, parameters);
-            return CalculateColorFromLight(reflector2.position, reflector2.color, point, N, I_O, parameters);
-            //return CalculateColorFromLight(reflector3.position, reflector3.color, point, N, I_O, parameters);
+            var ret = CalculateColorFromLight(reflector1.position, reflector1.color, point, N, I_O, parameters) + 
+                CalculateColorFromLight(reflector2.position, reflector2.color, point, N, I_O, parameters) + CalculateColorFromLight(reflector3.position, reflector3.color, point, N, I_O, parameters);
+            return ret.To255();
         }
 
         private static Color GetColorFromTexture(Vector3 point, IlluminationParameters parameters)
@@ -65,7 +65,7 @@ namespace InfrastructureLayer.Services
             return baseColor * (float)Math.Pow(CosineBetweenVectors(vp, vr), parameters.Mr);
         }
 
-        private static Color CalculateColorFromLight(Vector3 sourcePosition, Color reflectorColor, Vector3 point, Vector3 N, Vector3 I_O, IlluminationParameters parameters)
+        private static Vector3 CalculateColorFromLight(Vector3 sourcePosition, Color reflectorColor, Vector3 point, Vector3 N, Vector3 I_O, IlluminationParameters parameters)
         {
             var V = new Vector3(0, 0, 1);
 
@@ -75,7 +75,7 @@ namespace InfrastructureLayer.Services
 
             var actualColor1 = I_L * I_O * parameters.Kd * CosineBetweenVectors(N, L);
             var actualColor2 = I_L * I_O * parameters.Ks * (float)Math.Pow(CosineBetweenVectors(V, R), parameters.Mr);
-            return (actualColor1 + actualColor2).To255();
+            return actualColor1 + actualColor2;
         }
     }
 }
