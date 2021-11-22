@@ -44,7 +44,7 @@ namespace DomainLayer
                 OnPropertyChanged(nameof(M));
             }
         }
-        private int mr = 50;
+        private int mr = 5;
         public int Mr
         {
             get => mr;

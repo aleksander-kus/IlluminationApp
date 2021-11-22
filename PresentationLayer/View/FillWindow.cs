@@ -42,9 +42,11 @@ namespace PresentationLayer
             kdLabel.Text = $"kd: {kdTrackbar.Value / 100.0f:0.00}";
             ksLabel.Text = $"ks: {ksTrackbar.Value / 100.0f:0.00}";
             mLabel.Text = $"m: {mTrackbar.Value}";
-            zLabel.Text = $"Source height (z): {zTrackbar.Value}";
+            zLabel.Text = $"Source height (z): {1 + (float)zTrackbar.Value / presenter.Parameters.Radius:0.00}R";
             kLabel.Text = $"k: {kTrackbar.Value / 100.0f:0.00}";
-
+            hLabel.Text = $"H: {1 + HTrackbar.Value / presenter.Parameters.Radius}R";
+            mrLabel.Text = $"H: {mrTrackbar.Value}";
+            presenter.Parameters.Mr = mrTrackbar.Value;
         }
 
         private void kdTrackbar_ValueChanged(object sender, EventArgs e)
@@ -67,7 +69,8 @@ namespace PresentationLayer
         private void zTrackbar_ValueChanged(object sender, EventArgs e)
         {
             presenter.Parameters.Z = zTrackbar.Value;
-            zLabel.Text = $"Source height (z): {zTrackbar.Value}";
+            
+            zLabel.Text = $"Source height (z): {1 + (float)zTrackbar.Value / presenter.Parameters.Radius:0.00}R";
         }
         private void kTrackBar1_ValueChanged(object sender, EventArgs e)
         {
@@ -177,11 +180,25 @@ namespace PresentationLayer
         private void HTrackbar_Scroll(object sender, EventArgs e)
         {
             presenter.Parameters.H = HTrackbar.Value;
+            hLabel.Text = $"H: {1 + (float)HTrackbar.Value / presenter.Parameters.Radius:0.00}R";
         }
 
         private void mrTrackbar_Scroll(object sender, EventArgs e)
         {
             presenter.Parameters.Mr = mrTrackbar.Value;
+            mrLabel.Text = $"mr: {mrTrackbar.Value}";
+        }
+
+        private void normalButton_Click(object sender, EventArgs e)
+        {
+            presenter.Parameters.LightMode = DomainLayer.LightMode.Normal;
+            reflectorsButton.Checked = false;
+        }
+
+        private void reflectorsButton_Click(object sender, EventArgs e)
+        {
+            presenter.Parameters.LightMode = DomainLayer.LightMode.Reflectors;
+            normalButton.Checked = false;
         }
     }
 }

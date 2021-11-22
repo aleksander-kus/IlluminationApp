@@ -70,12 +70,12 @@ namespace PresentationLayer
             this.accurateButton = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.mrLabel = new System.Windows.Forms.Label();
+            this.hLabel = new System.Windows.Forms.Label();
             this.mrTrackbar = new System.Windows.Forms.TrackBar();
             this.HTrackbar = new System.Windows.Forms.TrackBar();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.reflectorsButton = new System.Windows.Forms.RadioButton();
+            this.normalButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -572,35 +572,35 @@ namespace PresentationLayer
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.label3);
-            this.panel6.Controls.Add(this.label2);
+            this.panel6.Controls.Add(this.mrLabel);
+            this.panel6.Controls.Add(this.hLabel);
             this.panel6.Controls.Add(this.mrTrackbar);
             this.panel6.Controls.Add(this.HTrackbar);
-            this.panel6.Controls.Add(this.radioButton2);
-            this.panel6.Controls.Add(this.radioButton1);
+            this.panel6.Controls.Add(this.reflectorsButton);
+            this.panel6.Controls.Add(this.normalButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 19);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(335, 135);
             this.panel6.TabIndex = 0;
             // 
-            // label3
+            // mrLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(148, 120);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "mr:";
+            this.mrLabel.AutoSize = true;
+            this.mrLabel.Location = new System.Drawing.Point(139, 120);
+            this.mrLabel.Name = "mrLabel";
+            this.mrLabel.Size = new System.Drawing.Size(25, 15);
+            this.mrLabel.TabIndex = 5;
+            this.mrLabel.Text = "mr:";
             // 
-            // label2
+            // hLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(148, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "H:";
+            this.hLabel.AutoSize = true;
+            this.hLabel.Location = new System.Drawing.Point(145, 83);
+            this.hLabel.Name = "hLabel";
+            this.hLabel.Size = new System.Drawing.Size(19, 15);
+            this.hLabel.TabIndex = 4;
+            this.hLabel.Text = "H:";
             // 
             // mrTrackbar
             // 
@@ -617,7 +617,7 @@ namespace PresentationLayer
             // HTrackbar
             // 
             this.HTrackbar.Location = new System.Drawing.Point(3, 53);
-            this.HTrackbar.Maximum = 200;
+            this.HTrackbar.Maximum = 2400;
             this.HTrackbar.Name = "HTrackbar";
             this.HTrackbar.Size = new System.Drawing.Size(329, 45);
             this.HTrackbar.TabIndex = 2;
@@ -625,27 +625,28 @@ namespace PresentationLayer
             this.HTrackbar.Value = 100;
             this.HTrackbar.Scroll += new System.EventHandler(this.HTrackbar_Scroll);
             // 
-            // radioButton2
+            // reflectorsButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(13, 28);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(77, 19);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Reflectors";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.reflectorsButton.AutoSize = true;
+            this.reflectorsButton.Location = new System.Drawing.Point(13, 28);
+            this.reflectorsButton.Name = "reflectorsButton";
+            this.reflectorsButton.Size = new System.Drawing.Size(77, 19);
+            this.reflectorsButton.TabIndex = 1;
+            this.reflectorsButton.Text = "Reflectors";
+            this.reflectorsButton.UseVisualStyleBackColor = true;
+            this.reflectorsButton.Click += new System.EventHandler(this.reflectorsButton_Click);
             // 
-            // radioButton1
+            // normalButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 3);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(65, 19);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Normal";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.normalButton.AutoSize = true;
+            this.normalButton.Checked = true;
+            this.normalButton.Location = new System.Drawing.Point(13, 3);
+            this.normalButton.Name = "normalButton";
+            this.normalButton.Size = new System.Drawing.Size(65, 19);
+            this.normalButton.TabIndex = 0;
+            this.normalButton.TabStop = true;
+            this.normalButton.Text = "Normal";
+            this.normalButton.UseVisualStyleBackColor = true;
             // 
             // FillWindow
             // 
@@ -741,11 +742,11 @@ namespace PresentationLayer
         private System.Windows.Forms.RadioButton accurateButton;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton reflectorsButton;
+        private System.Windows.Forms.RadioButton normalButton;
         private System.Windows.Forms.TrackBar mrTrackbar;
         private System.Windows.Forms.TrackBar HTrackbar;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label mrLabel;
+        private System.Windows.Forms.Label hLabel;
     }
 }
