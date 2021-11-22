@@ -42,7 +42,7 @@ namespace PresentationLayer
                 Radius = view.CanvasSizeX / 2,
                 CanvasX = view.CanvasSizeX,
                 CanvasY = view.CanvasSizeY,
-                SceneColor = Color.Green,
+                SceneColor = Color.White,
                 LightColor = Color.White,
                 LightSourcePosition = new Point(view.CanvasSizeX / 2, view.CanvasSizeY / 2),
                 Texture = new ByteBitmap(new Bitmap(this.view.Texture)),

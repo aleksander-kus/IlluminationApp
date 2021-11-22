@@ -647,6 +647,7 @@ namespace PresentationLayer
             this.normalButton.TabStop = true;
             this.normalButton.Text = "Normal";
             this.normalButton.UseVisualStyleBackColor = true;
+            this.normalButton.Click += new System.EventHandler(this.normalButton_Click);
             // 
             // FillWindow
             // 

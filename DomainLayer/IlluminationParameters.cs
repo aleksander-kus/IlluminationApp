@@ -65,7 +65,7 @@ namespace DomainLayer
             }
         }
 
-        private LightMode lightMode = LightMode.Reflectors;
+        private LightMode lightMode = LightMode.Normal;
         public LightMode LightMode
         {
             get => lightMode;
