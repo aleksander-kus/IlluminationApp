@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DomainLayer
 {
-    public class ComputationalPixel
+    public enum ColoringMode
     {
+        SolidColor = 0,
+        Texture = 1
     }
 }
