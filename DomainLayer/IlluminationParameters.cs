@@ -44,6 +44,40 @@ namespace DomainLayer
                 OnPropertyChanged(nameof(M));
             }
         }
+        private int mr = 50;
+        public int Mr
+        {
+            get => mr;
+            set
+            {
+                mr = value;
+                OnPropertyChanged(nameof(Mr));
+            }
+        }
+        private int h = 100;
+        public int H
+        {
+            get => h;
+            set
+            {
+                h = value;
+                OnPropertyChanged(nameof(H));
+            }
+        }
+
+        private LightMode lightMode = LightMode.Reflectors;
+        public LightMode LightMode
+        {
+            get => lightMode;
+            set
+            {
+                if (lightMode != value)
+                {
+                    lightMode = value;
+                    OnPropertyChanged(nameof(LightMode));
+                }
+            }
+        }
 
         private int z = 400;
         public int Z

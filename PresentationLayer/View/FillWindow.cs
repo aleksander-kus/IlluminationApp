@@ -173,5 +173,15 @@ namespace PresentationLayer
             presenter.Parameters.FillMode = DomainLayer.FillMode.Interpolation;
             accurateButton.Checked = false;
         }
+
+        private void HTrackbar_Scroll(object sender, EventArgs e)
+        {
+            presenter.Parameters.H = HTrackbar.Value;
+        }
+
+        private void mrTrackbar_Scroll(object sender, EventArgs e)
+        {
+            presenter.Parameters.Mr = mrTrackbar.Value;
+        }
     }
 }

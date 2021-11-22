@@ -68,6 +68,14 @@ namespace PresentationLayer
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.interpolationButton = new System.Windows.Forms.RadioButton();
             this.accurateButton = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.mrTrackbar = new System.Windows.Forms.TrackBar();
+            this.HTrackbar = new System.Windows.Forms.TrackBar();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuTable.SuspendLayout();
@@ -92,6 +100,10 @@ namespace PresentationLayer
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).BeginInit();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mrTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -131,10 +143,12 @@ namespace PresentationLayer
             this.menuTable.Controls.Add(this.groupBox3, 0, 2);
             this.menuTable.Controls.Add(this.groupBox5, 0, 3);
             this.menuTable.Controls.Add(this.groupBox6, 0, 4);
+            this.menuTable.Controls.Add(this.groupBox7, 0, 5);
             this.menuTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuTable.Location = new System.Drawing.Point(824, 3);
             this.menuTable.Name = "menuTable";
-            this.menuTable.RowCount = 5;
+            this.menuTable.RowCount = 6;
+            this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.menuTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -516,7 +530,7 @@ namespace PresentationLayer
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(3, 579);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(341, 100);
+            this.groupBox6.Size = new System.Drawing.Size(341, 70);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Fill method";
@@ -524,7 +538,7 @@ namespace PresentationLayer
             // interpolationButton
             // 
             this.interpolationButton.AutoSize = true;
-            this.interpolationButton.Location = new System.Drawing.Point(12, 63);
+            this.interpolationButton.Location = new System.Drawing.Point(12, 47);
             this.interpolationButton.Name = "interpolationButton";
             this.interpolationButton.Size = new System.Drawing.Size(93, 19);
             this.interpolationButton.TabIndex = 1;
@@ -544,6 +558,93 @@ namespace PresentationLayer
             this.accurateButton.Text = "Accurate";
             this.accurateButton.UseVisualStyleBackColor = true;
             this.accurateButton.Click += new System.EventHandler(this.accurateButton_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.panel6);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox7.Location = new System.Drawing.Point(3, 655);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(341, 157);
+            this.groupBox7.TabIndex = 5;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Light mode";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label3);
+            this.panel6.Controls.Add(this.label2);
+            this.panel6.Controls.Add(this.mrTrackbar);
+            this.panel6.Controls.Add(this.HTrackbar);
+            this.panel6.Controls.Add(this.radioButton2);
+            this.panel6.Controls.Add(this.radioButton1);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(3, 19);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(335, 135);
+            this.panel6.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(148, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(25, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "mr:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(148, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 15);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "H:";
+            // 
+            // mrTrackbar
+            // 
+            this.mrTrackbar.Location = new System.Drawing.Point(3, 96);
+            this.mrTrackbar.Maximum = 20;
+            this.mrTrackbar.Name = "mrTrackbar";
+            this.mrTrackbar.Size = new System.Drawing.Size(323, 45);
+            this.mrTrackbar.TabIndex = 3;
+            this.mrTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.mrTrackbar.Value = 5;
+            this.mrTrackbar.Scroll += new System.EventHandler(this.mrTrackbar_Scroll);
+            // 
+            // HTrackbar
+            // 
+            this.HTrackbar.Location = new System.Drawing.Point(3, 53);
+            this.HTrackbar.Maximum = 200;
+            this.HTrackbar.Name = "HTrackbar";
+            this.HTrackbar.Size = new System.Drawing.Size(329, 45);
+            this.HTrackbar.TabIndex = 2;
+            this.HTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.HTrackbar.Value = 100;
+            this.HTrackbar.Scroll += new System.EventHandler(this.HTrackbar_Scroll);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(13, 28);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(77, 19);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Reflectors";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(13, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(65, 19);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Normal";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // FillWindow
             // 
@@ -587,6 +688,11 @@ namespace PresentationLayer
             ((System.ComponentModel.ISupportInitialize)(this.zTrackbar)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mrTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HTrackbar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -632,5 +738,13 @@ namespace PresentationLayer
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton interpolationButton;
         private System.Windows.Forms.RadioButton accurateButton;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TrackBar mrTrackbar;
+        private System.Windows.Forms.TrackBar HTrackbar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
