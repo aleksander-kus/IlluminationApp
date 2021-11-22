@@ -348,6 +348,7 @@ namespace PresentationLayer
             this.kTrackbar.Size = new System.Drawing.Size(329, 45);
             this.kTrackbar.TabIndex = 4;
             this.kTrackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.kTrackbar.Value = 100;
             this.kTrackbar.ValueChanged += new System.EventHandler(this.kTrackBar1_ValueChanged);
             // 
             // sceneColorPreview
@@ -372,10 +373,12 @@ namespace PresentationLayer
             // textureRadioButton
             // 
             this.textureRadioButton.AutoSize = true;
+            this.textureRadioButton.Checked = true;
             this.textureRadioButton.Location = new System.Drawing.Point(6, 64);
             this.textureRadioButton.Name = "textureRadioButton";
             this.textureRadioButton.Size = new System.Drawing.Size(63, 19);
             this.textureRadioButton.TabIndex = 1;
+            this.textureRadioButton.TabStop = true;
             this.textureRadioButton.Text = "Texture";
             this.textureRadioButton.UseVisualStyleBackColor = true;
             this.textureRadioButton.Click += new System.EventHandler(this.textureRadioButton_Click);
@@ -383,12 +386,10 @@ namespace PresentationLayer
             // solidColorRadioButton
             // 
             this.solidColorRadioButton.AutoSize = true;
-            this.solidColorRadioButton.Checked = true;
             this.solidColorRadioButton.Location = new System.Drawing.Point(6, 22);
             this.solidColorRadioButton.Name = "solidColorRadioButton";
             this.solidColorRadioButton.Size = new System.Drawing.Size(81, 19);
             this.solidColorRadioButton.TabIndex = 0;
-            this.solidColorRadioButton.TabStop = true;
             this.solidColorRadioButton.Text = "Solid color";
             this.solidColorRadioButton.UseVisualStyleBackColor = true;
             this.solidColorRadioButton.Click += new System.EventHandler(this.solidColorRadioButton_Click);

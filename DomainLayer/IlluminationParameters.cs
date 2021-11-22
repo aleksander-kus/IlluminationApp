@@ -5,7 +5,7 @@ namespace DomainLayer
 {
     public class IlluminationParameters : INotifyPropertyChanged
     {
-        private float k = 0.0f;
+        private float k = 1.0f;
         public float K
         {
             get => k;
@@ -77,7 +77,7 @@ namespace DomainLayer
         public ByteBitmap Texture { get; set; }
         public ByteBitmap NormalMap { get; set; }
 
-        private ColoringMode coloringMode = ColoringMode.SolidColor;
+        private ColoringMode coloringMode = ColoringMode.Texture;
         public ColoringMode ColoringMode
         {
             get => coloringMode;
