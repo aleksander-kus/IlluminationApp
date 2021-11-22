@@ -1,26 +1,22 @@
 ﻿using DomainLayer;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InfrastructureLayer
 {
     public class AnimationService : IAnimationService
     {
-        private IlluminationParameters parameters;
-        const int iNumRevs = 3;
-        Point[] points;
-        int iNumPoints;
-        int current = 0;
+        private readonly IlluminationParameters parameters;
+        private readonly int numberOfPoints;
+        private Point[] points;
+        private int current = 0;
 
         public AnimationService(int interval, int time, IlluminationParameters parameters)
         {
             this.parameters = parameters;
-            iNumPoints = time / interval / 5;
-            points = new Point[iNumPoints];
+            numberOfPoints = time / interval / 5;
+            points = new Point[numberOfPoints];
             GeneratePointsOnSpiral();
         }
         public void AnimateFrame()
@@ -39,17 +35,17 @@ namespace InfrastructureLayer
 
         private void GeneratePointsOnSpiral()
         {
-            const int iNumRevs = 10;
+            const int numberOfCircles = 10;
             
-            float fAngle, fScale;
+            float angle, scale;
 
-            for (int i = 0; i < iNumPoints; i++)
+            for (int i = 0; i < numberOfPoints; i++)
             {
-                fAngle = (float)(i * 2 * Math.PI / (iNumPoints / iNumRevs));
-                fScale = 1 - (float)i / iNumPoints;
+                angle = (float)(i * 2 * Math.PI / (numberOfPoints / numberOfCircles));
+                scale = 1 - (float) i / numberOfPoints;
 
-                points[i].X = (int)Math.Round(parameters.CanvasX / 2 * (1 + fScale * Math.Cos(fAngle)));
-                points[i].Y = (int)Math.Round(parameters.CanvasY / 2 * (1 + fScale * Math.Sin(fAngle)));
+                points[i].X = (int)Math.Round(parameters.CanvasX / 2 * (1 + scale * Math.Cos(angle)));
+                points[i].Y = (int)Math.Round(parameters.CanvasY / 2 * (1 + scale * Math.Sin(angle)));
             }
             points = points.Reverse().ToArray();
         }

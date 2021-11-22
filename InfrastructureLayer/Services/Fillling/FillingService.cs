@@ -11,7 +11,7 @@ namespace InfrastructureLayer.Services
 {
     public class FillingService : IFillingService
     {
-        private IColorService colorService;
+        private readonly IColorService colorService;
 
         public FillingService(IColorService colorService)
         {
@@ -22,11 +22,8 @@ namespace InfrastructureLayer.Services
         {
             using Graphics graphics = Graphics.FromImage(bitmap);
             foreach(var shape in sphere)
-            {
-                using Pen p = new Pen(Color.Black, 1);
                 for(int i = 0; i < shape.Count; ++i)
-                    graphics.DrawLine(p, new Point((int)shape[i].X, (int)shape[i].Y), new Point((int)shape[(i + 1) % shape.Count].X, (int)shape[(i + 1) % shape.Count].Y));
-            }
+                    graphics.DrawLine(Pens.Black, new Point((int)shape[i].X, (int)shape[i].Y), new Point((int)shape[(i + 1) % shape.Count].X, (int)shape[(i + 1) % shape.Count].Y));
         }
         public void FillTriangles(Bitmap bitmap, List<List<Vector3>> shapes, IlluminationParameters parameters)
         {
@@ -91,13 +88,14 @@ namespace InfrastructureLayer.Services
                     for (int x = (int)Math.Round(AET[i].x); x < AET[i + 1].x; ++x)
                     {
                         Color color = Color.Black;
-                        if(parameters.FillMode == FillMode.Interpolation)
+                        float z = GetZ(x, y, shape[0], shape[1], shape[2]);
+                        if (parameters.FillMode == FillMode.Interpolation)
                         {
-                            var factors = GetInterpolationFactors(shape, new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                            var factors = GetInterpolationFactors(shape, new Vector3(x, y, z), parameters);
                             color = (color1 * factors.X + color2 * factors.Y + color3 * factors.Z).To255();
                         }
                         else
-                            color = colorService.ComputeColor(new Vector3(x, y, CalculateZ(x, y, shape[0], shape[1], shape[2])), parameters);
+                            color = colorService.ComputeColor(new Vector3(x, y, z), parameters);
                         bitmap.SetPixel(x, y, color);
                     }
                 }
@@ -125,9 +123,9 @@ namespace InfrastructureLayer.Services
         /// <summary>
         /// Calculate the third coordinate of a point, given three points of the plane it is on
         /// </summary>
-        public static float CalculateZ(int x, int y, Vector3 p1, Vector3 p2, Vector3 p3)
+        public static float GetZ(int x, int y, Vector3 p1, Vector3 p2, Vector3 p3)
         {
-            float z1 = p3.Z * (x - p1.X) * (y - p2.Y) + p1.Z * (x - p2.X) * (y - p3.Y) + p2.Z * (x - p3.X) * (y - p1.Y) - p2.Z * (x - p1.X) * (y - p3.Y) - p3.Z * (x - p2.X) * (y - p1.Y) - p1.Z * (x - p3.X) * (y - p2.Y);
+            float z1 = p1.Z * (x - p2.X) * (y - p3.Y) + p2.Z * (x - p3.X) * (y - p1.Y) + p3.Z * (x - p1.X) * (y - p2.Y) - p1.Z * (x - p3.X) * (y - p2.Y) - p2.Z * (x - p1.X) * (y - p3.Y) - p3.Z * (x - p2.X) * (y - p1.Y);
             float z2 = (x - p1.X) * (y - p2.Y) + (x - p2.X) * (y - p3.Y) + (x - p3.X) * (y - p1.Y) - (x - p1.X) * (y - p3.Y) - (x - p2.X) * (y - p1.Y) - (x - p3.X) * (y - p2.Y);
 
             return z1/z2;

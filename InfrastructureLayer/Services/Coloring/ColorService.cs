@@ -38,7 +38,7 @@ namespace InfrastructureLayer.Services
 
         private static Vector3 Multiply(Vector3 v, Vector3 n)
         {
-            var B = (n.Z == 1) ? new Vector3(0, 1, 0) : Vector3.Normalize(n * new Vector3(0, 0, 1));
+            var B = (n.Z != 1) ? Vector3.Normalize(n * new Vector3(0, 0, 1)) : new Vector3(0, 1, 0);
             var T = Vector3.Normalize(Vector3.Cross(B, n));
             return Vector3.Normalize(T * v.X + B * v.Y + n * v.Z);
         }
